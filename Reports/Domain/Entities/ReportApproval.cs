@@ -1,0 +1,17 @@
+﻿using Reports.Api.Domain.Entities;
+using Reports.Domain.Primitives;
+
+namespace Reports.Domain.Entities
+{
+    public class ReportApproval : BaseEntity
+    {
+        public int ReportId { get; set; }
+        public int UserId { get; set; }
+        public string Role { get; set; } = string.Empty; // "NRA", "LM", "RO", "RA"
+        public bool IsApproved { get; set; } = false;
+        public DateTime? ApprovalDate { get; set; }
+
+        public Report? Report { get; set; }
+        public User? User { get; set; }
+    }
+}

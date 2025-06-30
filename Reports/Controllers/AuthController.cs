@@ -1,19 +1,16 @@
-﻿
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Auth.Models;
 using Reports.Api.Auth.Services;
 using Reports.Api.Domain.Constants;
+using Reports.Api.Domain.Entities;
 using Reports.Api.Features.Auth.Commands.RefreshToken;
+using Reports.Api.Features.Auth.Commands.Register;
 using Reports.Application.Auth.Models;
 using Reports.Features.Admin.Commands.AddUser;
 using Reports.Features.Auth.Commands.UpLoadSignature;
-using System.Security.Claims;
-using Reports.Api.Features.Auth.Commands.Register;
-using Reports.Api.Domain.Entities;
 using Reports.Features.Auth.Queries.GetMyProfile;
+using System.Security.Claims;
 
 namespace Reports.Api.Controllers
 {
@@ -93,8 +90,8 @@ namespace Reports.Api.Controllers
         public async Task<IActionResult> UpLoadSignature([FromForm] UpLoadSignatureCommand command)
         {
             await _mediator.Send(command);
-           return Ok("Upload Image is Succesd ");
-           
+            return Ok("Upload Image is successful ");
+
         }
 
         [Authorize]

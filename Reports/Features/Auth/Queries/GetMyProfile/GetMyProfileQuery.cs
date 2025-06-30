@@ -16,7 +16,7 @@ namespace Reports.Features.Auth.Queries.GetMyProfile
 
     public class GetMyProfileQueryHandler(
        AppDbContext context,
-       ICurrentUserService currentUserService ,
+       ICurrentUserService currentUserService,
        IStorageService storageService
        ) : ICommandHandler<GetMyProfileQuery, UserDto>
     {
@@ -31,7 +31,7 @@ namespace Reports.Features.Auth.Queries.GetMyProfile
                         Email = r.Email != null ? r.Email : string.Empty,
                         EnailConfirmed = r.EmailConfirmed,
                         UserName = r.UserName != null ? r.UserName : string.Empty,
-                        SignaturePath = storageService.GetFullPath(r.SignaturePath, false),
+                        SignaturePath = r.SignaturePath != null ? storageService.GetFullPath(r.SignaturePath, false) : string.Empty,
                         Geha = r.Geha,
                         Level = r.Level.ToString()
 
@@ -45,7 +45,7 @@ namespace Reports.Features.Auth.Queries.GetMyProfile
                 throw new BadRequestException(ex.Message);
             }
 
-          
+
         }
     }
 

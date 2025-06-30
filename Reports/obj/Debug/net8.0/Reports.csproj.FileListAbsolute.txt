@@ -312,3 +312,5 @@ E:\Reports\Reports\obj\Debug\net8.0\Reports.pdb
 E:\Reports\Reports\obj\Debug\net8.0\Reports.genruntimeconfig.cache
 E:\Reports\Reports\obj\Debug\net8.0\ref\Reports.dll
 E:\Reports\Reports\bin\Debug\net8.0\Reports.staticwebassets.runtime.json
+E:\Jobs\projects\Reports\Reports\Reports\bin\Debug\net8.0\Reports.staticwebassets.runtime.json
+E:\Jobs\projects\Reports\Reports\Reports\obj\Debug\net8.0\Reports.sourcelink.json

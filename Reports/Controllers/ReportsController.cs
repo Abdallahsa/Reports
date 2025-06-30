@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Reports.Api.Controllers;
+using Reports.Api.Domain.Constants;
+using Reports.Features.Reportss.Commands.CreateDailyDeputyReport;
 
 namespace Reports.Controllers
 {
@@ -10,6 +11,23 @@ namespace Reports.Controllers
     public class ReportsController : BaseController
     {
 
+        [HttpGet("create-daily-deputy-report")]
+        [Authorize(Roles = RoleConstants.LevelZero)]
+        public async Task<IActionResult> CreateDailyDeputyReport()
+        {
+            return Ok(await _mediator.Send(new CreateDailyDeputyReportCommand { }));
+
+        }
+
+        // endpoint to return all reports 
+        [HttpGet("all-reports")]
+        [Authorize(Roles = RoleConstants.LevelZero)]
+        public async Task<IActionResult> GetAllReports()
+        {
+            // This is a placeholder for the actual implementation
+            // You would typically call a service to get the reports
+            return Ok("This endpoint will return all reports.");
+        }
 
     }
 

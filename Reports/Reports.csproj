@@ -29,6 +29,7 @@
   <ItemGroup>
     <Folder Include="Features\Admin\Models\" />
     <Folder Include="Features\Admin\Queries\" />
+    <Folder Include="Features\Reportss\Model\" />
     <Folder Include="wwwroot\StaticFiles\Docs\" />
     <Folder Include="wwwroot\StaticFiles\Images\" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using Reports.Api.Auth.Services;
 using Reports.Api.Services;
 using Reports.Api.Services.CurrentUser;
+using Reports.Service.SaveReport;
 
 namespace Reports.Api.Configurations
 {
@@ -15,6 +16,7 @@ namespace Reports.Api.Configurations
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<ITemplateReportService, TemplateReportService>();
 
 
             //services.AddSingleton(services => new MapperConfiguration(cfg =>

@@ -1,13 +1,15 @@
-﻿namespace Reports.Api.Domain.Constants
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Reports.Api.Domain.Constants
 {
     public class RoleConstants
     {
-        public string Admin = "Admin";
-        public string LevelZero = "LevelZero";
-        public string LevelOne = "LevelOne";
-        public string LevelTwo = "LevelTwo";
-        public string LevelThree = "LevelThree";
-        public string LevelFour = "LevelFour";
+        public const string Admin = "Admin";
+        public const string LevelZero = "LevelZero";
+        public const  string LevelOne = "LevelOne";
+        public const string LevelTwo = "LevelTwo";
+        public const string LevelThree = "LevelThree";
+        public const string LevelFour = "LevelFour";
 
 
     }

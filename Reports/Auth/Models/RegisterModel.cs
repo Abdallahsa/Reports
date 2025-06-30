@@ -19,6 +19,11 @@ namespace Reports.Api.Auth.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
 
+        public Level Level { get; set; } 
+
+        public required Geha Geha { get; set; }
+
+        public IFormFile ? Signature { get; set; } 
 
     }
 

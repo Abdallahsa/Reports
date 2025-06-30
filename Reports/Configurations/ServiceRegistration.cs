@@ -1,7 +1,8 @@
 ﻿using Reports.Api.Auth.Services;
+using Reports.Api.Services;
 using Reports.Api.Services.CurrentUser;
 
-namespace TwoHO.Api.Configurations
+namespace Reports.Api.Configurations
 {
     public static class ServiceRegistration
     {
@@ -13,6 +14,7 @@ namespace TwoHO.Api.Configurations
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IStorageService, StorageService>();
 
 
             //services.AddSingleton(services => new MapperConfiguration(cfg =>

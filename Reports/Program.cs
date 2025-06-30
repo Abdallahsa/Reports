@@ -1,3 +1,4 @@
+using Manzoma.Api.Data.Seeders;
 using Microsoft.OpenApi.Models;
 using Reports.Api.Configurations;
 using System.Text.Json;
@@ -72,5 +73,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.SeedData(); 
 
 app.Run();

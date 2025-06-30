@@ -16,7 +16,7 @@ namespace Reports.Api.Services.CurrentUser
 
         public string? Email => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
 
-        public string? Type => _httpContextAccessor.HttpContext?.User?.FindFirstValue("Type");
+        public string? Level => _httpContextAccessor.HttpContext?.User?.FindFirstValue("Level");
 
 
         public string Lang => (_httpContextAccessor.HttpContext?.Request.Headers.AcceptLanguage.ToString() == "ar" ? "ar" : "en");

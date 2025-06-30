@@ -277,6 +277,10 @@ namespace Reports.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GehaCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -329,32 +333,6 @@ namespace Reports.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Approval");
-                });
-
-            modelBuilder.Entity("Reports.Domain.Entities.ReportPath", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReportId");
-
-                    b.ToTable("Paths");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -438,17 +416,6 @@ namespace Reports.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Reports.Domain.Entities.ReportPath", b =>
-                {
-                    b.HasOne("Reports.Domain.Entities.Report", "Report")
-                        .WithMany("Paths")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Report");
-                });
-
             modelBuilder.Entity("Reports.Api.Domain.Entities.User", b =>
                 {
                     b.Navigation("Approvals");
@@ -457,8 +424,6 @@ namespace Reports.Data.Migrations
             modelBuilder.Entity("Reports.Domain.Entities.Report", b =>
                 {
                     b.Navigation("Approvals");
-
-                    b.Navigation("Paths");
                 });
 #pragma warning restore 612, 618
         }

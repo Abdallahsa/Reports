@@ -67,11 +67,12 @@ namespace Reports.Api.Auth.Services
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
             };
 
-            //// add user type
-            //var type = GetUserType(user);
-            //if(type != null ) {
-            //    claims.Add(new Claim("Type", type));
-            //}
+            // add user type
+            var level = GetUserLevel(user);
+            if (level != null)
+            {
+                claims.Add(new Claim("Level", level));
+            }
 
             // Fetch roles and add them as claims
             var roles = await _userManager.GetRolesAsync(user);
@@ -94,11 +95,11 @@ namespace Reports.Api.Auth.Services
         }
 
 
-        //private static string ? GetUserType(User user)
-        //{
-        //    return user.Type.ToString();
+        private static string? GetUserLevel(User user)
+        {
+            return user.Level.ToString();
 
-        //}
+        }
 
 
 

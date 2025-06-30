@@ -27,7 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Features\Admin\Models\" />
+    <Folder Include="Features\Admin\Queries\" />
+    <Folder Include="wwwroot\StaticFiles\Docs\" />
+    <Folder Include="wwwroot\StaticFiles\Images\" />
   </ItemGroup>
 
 </Project>

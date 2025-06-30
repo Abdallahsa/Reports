@@ -10,8 +10,8 @@ namespace Reports.Domain.Entities
         public ReportType ReportType { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsApprovedByRA { get; set; }
+        public string FilePath { get; set; } = string.Empty;
 
-        public ICollection<ReportPath> Paths { get; set; } = new List<ReportPath>();
         public ICollection<ReportApproval> Approvals { get; set; } = new List<ReportApproval>();
     }
 

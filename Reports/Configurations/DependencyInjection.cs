@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TwoHO.Api.Configurations;
+using Reports.Api.Configurations;
 
 namespace Reports.Api.Configurations
 {

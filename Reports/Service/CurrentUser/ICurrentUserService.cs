@@ -5,7 +5,7 @@
         int UserId { get; }
         string? Email { get; }
         string? Lang { get; }
-        string? Type { get; }
+        string? Level { get; }
         bool IsAuthenticated { get; }
         ICollection<string>? Role { get; }
     }

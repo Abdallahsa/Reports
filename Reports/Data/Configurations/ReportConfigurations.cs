@@ -8,9 +8,7 @@ namespace Reports.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Report> builder)
         {
-            builder.HasMany(x => x.Paths)
-                .WithOne(x => x.Report)
-                .OnDelete(DeleteBehavior.Cascade);
+
 
 
             builder.HasMany(x => x.Approvals)

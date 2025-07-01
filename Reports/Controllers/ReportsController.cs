@@ -24,8 +24,7 @@ namespace Reports.Controllers
         [Authorize(Roles = RoleConstants.LevelZero)]
         public async Task<IActionResult> GetAllReports()
         {
-            // This is a placeholder for the actual implementation
-            // You would typically call a service to get the reports
+            
             return Ok("This endpoint will return all reports.");
         }
 

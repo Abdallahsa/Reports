@@ -3,100 +3,40 @@
   "WorkspaceRootPath": "E:\\Reports\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\auth\\queries\\getmyprofile\\getmyprofilequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\auth\\queries\\getmyprofile\\getmyprofilequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\reportss\\queries\\getallreport\\getallreportquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\reportss\\queries\\getallreport\\getallreportquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\reportss\\model\\getallreportmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\reportss\\model\\getallreportmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\common\\models\\stuffuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\common\\models\\stuffuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\reportss\\model\\getreportapprovalmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\reportss\\model\\getreportapprovalmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\reportapproval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\reportapproval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\admin\\commands\\adduser\\addusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\admin\\commands\\adduser\\addusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\collections\\hastableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\collections\\hastableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\auth\\models\\registercustomermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\auth\\models\\registercustomermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\collections\\hastableviewwithdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\collections\\hastableviewwithdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\auth\\commands\\register\\registercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\auth\\commands\\register\\registercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\auth\\commands\\register\\registercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\auth\\commands\\register\\registercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\auth\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\auth\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\auth\\models\\registercustomermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\auth\\models\\registercustomermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\auth\\models\\registermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\auth\\models\\registermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\auth\\commands\\uploadsignature\\uploadsignaturecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\auth\\commands\\uploadsignature\\uploadsignaturecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\configurations\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\configurations\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\configurations\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\configurations\\serviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\service\\storage\\storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\service\\storage\\storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\service\\storage\\istorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\service\\storage\\istorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\auth\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\auth\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\configurations\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\configurations\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\collections\\haspagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\collections\\haspagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -110,313 +50,143 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StuffUserDto.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Common\\Models\\StuffUserDto.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Common\\Models\\StuffUserDto.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Common\\Models\\StuffUserDto.cs",
-              "RelativeToolTip": "Reports\\Features\\Common\\Models\\StuffUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:18:42.315Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GetMyProfileQuery.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Auth\\Queries\\GetMyProfile\\GetMyProfileQuery.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Auth\\Queries\\GetMyProfile\\GetMyProfileQuery.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Auth\\Queries\\GetMyProfile\\GetMyProfileQuery.cs",
-              "RelativeToolTip": "Reports\\Features\\Auth\\Queries\\GetMyProfile\\GetMyProfileQuery.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwCMAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:16:48.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AddUserCommand.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Admin\\Commands\\AddUser\\AddUserCommand.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Admin\\Commands\\AddUser\\AddUserCommand.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Admin\\Commands\\AddUser\\AddUserCommand.cs",
-              "RelativeToolTip": "Reports\\Features\\Admin\\Commands\\AddUser\\AddUserCommand.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAApwCAAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:03:28.417Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "RegisterModel.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Auth\\Models\\RegisterModel.cs",
-              "RelativeDocumentMoniker": "Reports\\Auth\\Models\\RegisterModel.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Auth\\Models\\RegisterModel.cs",
-              "RelativeToolTip": "Reports\\Auth\\Models\\RegisterModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBcAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:04:05.999Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\User.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:43.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Reports\\Controllers\\AuthController.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Reports\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAASwGYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:41:20.431Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Report.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\Report.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\Report.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAADwvxEAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:19.601Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ReportApproval.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\ReportApproval.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\ReportApproval.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\ReportApproval.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\ReportApproval.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAmwAoAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:36.426Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "ReportsController.cs",
               "DocumentMoniker": "E:\\Reports\\Reports\\Controllers\\ReportsController.cs",
               "RelativeDocumentMoniker": "Reports\\Controllers\\ReportsController.cs",
               "ToolTip": "E:\\Reports\\Reports\\Controllers\\ReportsController.cs",
               "RelativeToolTip": "Reports\\Controllers\\ReportsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T12:56:32.317Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BaseController.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Controllers\\BaseController.cs",
-              "RelativeDocumentMoniker": "Reports\\Controllers\\BaseController.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Controllers\\BaseController.cs",
-              "RelativeToolTip": "Reports\\Controllers\\BaseController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAARAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "GetAllReportQuery.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
+              "RelativeDocumentMoniker": "Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
+              "RelativeToolTip": "Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:57.627Z",
+              "WhenOpened": "2025-07-01T11:56:28.5Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "RegisterCustomerModel.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Auth\\Models\\RegisterCustomerModel.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Auth\\Models\\RegisterCustomerModel.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Auth\\Models\\RegisterCustomerModel.cs",
-              "RelativeToolTip": "Reports\\Features\\Auth\\Models\\RegisterCustomerModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAcAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "GetReportApprovalModel.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Reportss\\Model\\GetReportApprovalModel.cs",
+              "RelativeDocumentMoniker": "Reports\\Features\\Reportss\\Model\\GetReportApprovalModel.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Features\\Reportss\\Model\\GetReportApprovalModel.cs",
+              "RelativeToolTip": "Reports\\Features\\Reportss\\Model\\GetReportApprovalModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:02:18.799Z",
+              "WhenOpened": "2025-07-01T12:11:25.046Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RegisterCommand.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\Register\\RegisterCommand.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Auth\\Commands\\Register\\RegisterCommand.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\Register\\RegisterCommand.cs",
-              "RelativeToolTip": "Reports\\Features\\Auth\\Commands\\Register\\RegisterCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAA4AAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ReportApproval.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\ReportApproval.cs",
+              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\ReportApproval.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\ReportApproval.cs",
+              "RelativeToolTip": "Reports\\Domain\\Entities\\ReportApproval.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:03:48.792Z",
+              "WhenOpened": "2025-07-01T12:09:54.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RegisterCommandHandler.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
-              "RelativeToolTip": "Reports\\Features\\Auth\\Commands\\Register\\RegisterCommandHandler.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAhwBEAAAAwAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GetAllReportModel.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Reportss\\Model\\GetAllReportModel.cs",
+              "RelativeDocumentMoniker": "Reports\\Features\\Reportss\\Model\\GetAllReportModel.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Features\\Reportss\\Model\\GetAllReportModel.cs",
+              "RelativeToolTip": "Reports\\Features\\Reportss\\Model\\GetAllReportModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAwA0AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:03:55.192Z",
+              "WhenOpened": "2025-07-01T12:07:38.793Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "RegisterCustomerModel.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Auth\\Models\\RegisterCustomerModel.cs",
-              "RelativeDocumentMoniker": "Reports\\Auth\\Models\\RegisterCustomerModel.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Auth\\Models\\RegisterCustomerModel.cs",
-              "RelativeToolTip": "Reports\\Auth\\Models\\RegisterCustomerModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "HasTableViewWithDate.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Collections\\HasTableViewWithDate.cs",
+              "RelativeDocumentMoniker": "Reports\\Common\\Collections\\HasTableViewWithDate.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Common\\Collections\\HasTableViewWithDate.cs",
+              "RelativeToolTip": "Reports\\Common\\Collections\\HasTableViewWithDate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:19:48.215Z",
+              "WhenOpened": "2025-07-01T12:01:35.942Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Auth\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "Reports\\Auth\\Services\\AuthService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Auth\\Services\\AuthService.cs",
-              "RelativeToolTip": "Reports\\Auth\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAADgv6gAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "HasTableView.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Collections\\HasTableView.cs",
+              "RelativeDocumentMoniker": "Reports\\Common\\Collections\\HasTableView.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Common\\Collections\\HasTableView.cs",
+              "RelativeToolTip": "Reports\\Common\\Collections\\HasTableView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:04:40.592Z",
+              "WhenOpened": "2025-07-01T11:57:15.105Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "UpLoadSignatureCommand.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\UpLoadSignature\\UpLoadSignatureCommand.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Auth\\Commands\\UpLoadSignature\\UpLoadSignatureCommand.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Auth\\Commands\\UpLoadSignature\\UpLoadSignatureCommand.cs",
-              "RelativeToolTip": "Reports\\Features\\Auth\\Commands\\UpLoadSignature\\UpLoadSignatureCommand.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwB0AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T11:06:34.095Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Configurations\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Reports\\Configurations\\DependencyInjection.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Configurations\\DependencyInjection.cs",
-              "RelativeToolTip": "Reports\\Configurations\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T11:55:09.563Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "StorageService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Service\\Storage\\StorageService.cs",
-              "RelativeDocumentMoniker": "Reports\\Service\\Storage\\StorageService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Service\\Storage\\StorageService.cs",
-              "RelativeToolTip": "Reports\\Service\\Storage\\StorageService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T07:35:25.016Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ServiceRegistration.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Configurations\\ServiceRegistration.cs",
-              "RelativeDocumentMoniker": "Reports\\Configurations\\ServiceRegistration.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Configurations\\ServiceRegistration.cs",
-              "RelativeToolTip": "Reports\\Configurations\\ServiceRegistration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T07:27:59.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "IStorageService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Service\\Storage\\IStorageService.cs",
-              "RelativeDocumentMoniker": "Reports\\Service\\Storage\\IStorageService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Service\\Storage\\IStorageService.cs",
-              "RelativeToolTip": "Reports\\Service\\Storage\\IStorageService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T07:35:16.193Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Auth\\Services\\IAuthService.cs",
-              "RelativeDocumentMoniker": "Reports\\Auth\\Services\\IAuthService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Auth\\Services\\IAuthService.cs",
-              "RelativeToolTip": "Reports\\Auth\\Services\\IAuthService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAADwvwoAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:20:27.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ApplicationExtensions.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Configurations\\ApplicationExtensions.cs",
-              "RelativeDocumentMoniker": "Reports\\Configurations\\ApplicationExtensions.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Configurations\\ApplicationExtensions.cs",
-              "RelativeToolTip": "Reports\\Configurations\\ApplicationExtensions.cs",
+              "DocumentIndex": 8,
+              "Title": "HasPagination.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Collections\\HasPagination.cs",
+              "RelativeDocumentMoniker": "Reports\\Common\\Collections\\HasPagination.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Common\\Collections\\HasPagination.cs",
+              "RelativeToolTip": "Reports\\Common\\Collections\\HasPagination.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T07:27:58.617Z",
+              "WhenOpened": "2025-07-01T11:57:11.998Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "0acdf7a3-6f53-4363-83a8-1898556a948e",
+        "Display": 0,
+        "X": 127,
+        "Y": 127,
+        "Width": 1247,
+        "Height": 609,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Role.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\Role.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\Role.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\Role.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Report.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
+              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\Report.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
+              "RelativeToolTip": "Reports\\Domain\\Entities\\Report.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAwAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:50.292Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "RefreshToken.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\RefreshToken.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\RefreshToken.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\RefreshToken.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\RefreshToken.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T12:43:15.204Z"
+              "WhenOpened": "2025-07-01T12:08:05.876Z",
+              "EditorCaption": ""
             }
           ]
         }

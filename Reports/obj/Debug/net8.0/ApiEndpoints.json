@@ -274,5 +274,25 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "GetAllReports",
+    "RelativePath": "api/Reports/all-reports",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "CreateDailyDeputyReport",
+    "RelativePath": "api/Reports/create-daily-deputy-report",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

@@ -29,19 +29,16 @@ namespace Reports.Features.Reportss.Commands.CreateDailyDeputyReport
         {
             try
             {
-                // Get current user from DB
                 var user = await _context.Set<User>()
                     .FindAsync(_currentUserService.UserId)
                     ?? throw new NotFoundException(nameof(User), _currentUserService.UserId);
 
-                // انسخ template واعمل نسخة جديدة
                 var newFileName = _templateReportService.CopyTemplateAndSave(
                     templateFileName: "DailyDeputyReport.docx",
                     reportType: ReportType.DailyDeputyReport.ToString(),
                     gehaCode: user.Geha.ToString()
                 );
 
-                // Create Report
                 var gehaEnum = Enum.TryParse<Geha>(user.Geha, out var parsedGeha) ? parsedGeha : Geha.None;
 
                 var report = new Report
@@ -51,26 +48,27 @@ namespace Reports.Features.Reportss.Commands.CreateDailyDeputyReport
                     ShoabaName = gehaEnum.ToArabic(),
                     Description = "تقرير المنوبين اليومى",
                     FilePath = newFileName,
-
                 };
 
                 await _context.Set<Report>().AddAsync(report);
                 await _context.SaveChangesAsync();
 
+                // فك التشفير في الذاكرة
+                var decryptedBytes = _templateReportService.GetDecryptedFile(newFileName);
 
+                // رجّع الملف كـ base64 string
+                var base64String = Convert.ToBase64String(decryptedBytes);
+
+                //return base64String;
 
                 return _storageService.GetFullPath(newFileName, true);
-
-
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-
             }
-
-
         }
+
     }
 
     public class CreateDailyDeputyReportCommandValidator : AbstractValidator<CreateDailyDeputyReportCommand>

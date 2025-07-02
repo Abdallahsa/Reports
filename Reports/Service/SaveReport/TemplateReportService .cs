@@ -1,15 +1,19 @@
 ﻿using Reports.Common.Exceptions;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Reports.Service.SaveReport
 {
     public class TemplateReportService : ITemplateReportService
     {
-
         private static readonly string TemplatesFolder =
             Path.Combine(Environment.CurrentDirectory, "wwwroot", "StaticFiles", "Templets");
 
         private static readonly string TargetDocsFolder =
             Path.Combine(Environment.CurrentDirectory, "wwwroot", "StaticFiles", "Docs");
+
+        // استخدم مفتاح ثابت هنا للتوضيح فقط؛ يفضل تجيبه من environment variable
+        private static readonly string EncryptionKey = "12345678901234567890123456789012"; // لازم يكون 32 بايت لـ AES-256
 
         public TemplateReportService()
         {
@@ -22,29 +26,67 @@ namespace Reports.Service.SaveReport
 
         public string CopyTemplateAndSave(string templateFileName, string reportType, string gehaCode)
         {
-            // المسار الكامل للـ template الأصلي
             var templateFullPath = Path.Combine(TemplatesFolder, templateFileName);
             if (!File.Exists(templateFullPath))
                 throw new PathNotFoundException(templateFullPath);
 
-            // توليد اسم الملف الجديد: 2024-10-21-AZ-DailyDeputyReport.docx
             var today = DateTime.UtcNow.Date.ToString("yyyy-MM-dd");
             var newFileName = $"{today}-{gehaCode}-{reportType}.docx";
 
-            // المسار النهائي النسبي في wwwroot
             var fullDestinationPath = Path.Combine(TargetDocsFolder, newFileName);
 
             try
             {
-                File.Copy(templateFullPath, fullDestinationPath, overwrite: true);
+                EncryptFile(templateFullPath, fullDestinationPath, EncryptionKey);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new PathNotFoundException(fullDestinationPath);
+                throw new PathNotFoundException($"Error encrypting and saving file: {ex.Message}");
             }
 
-            // ترجّع اسم الملف فقط، أو ترجّع المسار النسبي (حسب اللي تحتاجه)
             return newFileName;
+        }
+
+        // دالة فك التشفير وإرجاع stream أو محتوى الملف مفكوك
+        public byte[] GetDecryptedFile(string fileName)
+        {
+            var fullPath = Path.Combine(TargetDocsFolder, fileName);
+            if (!File.Exists(fullPath))
+                throw new PathNotFoundException(fullPath);
+
+            return DecryptFileToBytes(fullPath, EncryptionKey);
+        }
+
+        private void EncryptFile(string inputPath, string outputPath, string key)
+        {
+            using var aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.GenerateIV(); // كل ملف IV مختلف
+
+            using var outFs = new FileStream(outputPath, FileMode.Create, FileAccess.Write);
+            // أول حاجة نخزنها في الملف هي IV
+            outFs.Write(aes.IV, 0, aes.IV.Length);
+
+            using var cryptoStream = new CryptoStream(outFs, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            using var inFs = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
+            inFs.CopyTo(cryptoStream);
+        }
+
+        private byte[] DecryptFileToBytes(string inputPath, string key)
+        {
+            using var aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(key);
+
+            using var inFs = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
+            // اقرأ IV من أول الملف
+            var iv = new byte[aes.BlockSize / 8];
+            inFs.Read(iv, 0, iv.Length);
+            aes.IV = iv;
+
+            using var cryptoStream = new CryptoStream(inFs, aes.CreateDecryptor(), CryptoStreamMode.Read);
+            using var memory = new MemoryStream();
+            cryptoStream.CopyTo(memory);
+            return memory.ToArray();
         }
     }
 }

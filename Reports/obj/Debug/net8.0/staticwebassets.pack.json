@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-06-30-AZ-DailyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-06-30-AZ-DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Images\\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png",
+      "PackagePath": "staticwebassets\\StaticFiles\\Images\\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png"
+    },
+    {
       "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Images\\4387cc28-7684-4bef-9da3-6c2ec33defd1_Annotation 2025-06-30 093202.png",
       "PackagePath": "staticwebassets\\StaticFiles\\Images\\4387cc28-7684-4bef-9da3-6c2ec33defd1_Annotation 2025-06-30 093202.png"
     },

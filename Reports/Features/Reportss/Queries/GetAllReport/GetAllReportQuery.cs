@@ -35,16 +35,17 @@ namespace Reports.Features.Reportss.Queries.GetAllReport
 
 
     //        }
-    //        catch ( Exception ex ) {
+    //        catch (Exception ex)
+    //        {
 
     //            throw new Exception(ex.Message);
 
-           
+
+    //        }
     //    }
-    //}
 
 
 
 
 
-}
+    }

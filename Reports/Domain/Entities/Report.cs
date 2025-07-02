@@ -11,8 +11,14 @@ namespace Reports.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsApprovedByRA { get; set; }
         public string FilePath { get; set; } = string.Empty;
+        public FileStatus Status { get; set; } = FileStatus.Locked;
 
         public ICollection<ReportApproval> Approvals { get; set; } = new List<ReportApproval>();
+    }
+    public enum FileStatus
+    {
+        Locked = 0,
+        Unlocked = 1
     }
 
     public enum ReportType

@@ -48,20 +48,14 @@ namespace Reports.Features.Reportss.Commands.CreateDailyDeputyReport
                     ShoabaName = gehaEnum.ToArabic(),
                     Description = "تقرير المنوبين اليومى",
                     FilePath = newFileName,
+                    Status = FileStatus.Locked,
                 };
 
                 await _context.Set<Report>().AddAsync(report);
                 await _context.SaveChangesAsync();
 
-                // فك التشفير في الذاكرة
-                var decryptedBytes = _templateReportService.GetDecryptedFile(newFileName);
+                return newFileName;
 
-                // رجّع الملف كـ base64 string
-                var base64String = Convert.ToBase64String(decryptedBytes);
-
-                //return base64String;
-
-                return _storageService.GetFullPath(newFileName, true);
             }
             catch (Exception ex)
             {

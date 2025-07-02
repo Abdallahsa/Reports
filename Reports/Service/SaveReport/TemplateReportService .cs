@@ -12,8 +12,7 @@ namespace Reports.Service.SaveReport
         private static readonly string TargetDocsFolder =
             Path.Combine(Environment.CurrentDirectory, "wwwroot", "StaticFiles", "Docs");
 
-        // استخدم مفتاح ثابت هنا للتوضيح فقط؛ يفضل تجيبه من environment variable
-        private static readonly string EncryptionKey = "12345678901234567890123456789012"; // لازم يكون 32 بايت لـ AES-256
+        private static readonly string EncryptionKey = "12345678901234567890123456789012"; // 32 bytes for AES-256
 
         public TemplateReportService()
         {
@@ -47,7 +46,6 @@ namespace Reports.Service.SaveReport
             return newFileName;
         }
 
-        // دالة فك التشفير وإرجاع stream أو محتوى الملف مفكوك
         public byte[] GetDecryptedFile(string fileName)
         {
             var fullPath = Path.Combine(TargetDocsFolder, fileName);
@@ -57,19 +55,51 @@ namespace Reports.Service.SaveReport
             return DecryptFileToBytes(fullPath, EncryptionKey);
         }
 
+        public void DecryptFileInPlace(string fileName)
+        {
+            var fullPath = Path.Combine(TargetDocsFolder, fileName);
+            if (!File.Exists(fullPath))
+                throw new PathNotFoundException(fullPath);
+
+            var decryptedBytes = DecryptFileToBytes(fullPath, EncryptionKey);
+            File.WriteAllBytes(fullPath, decryptedBytes); // replace file with decrypted content
+        }
+
+        public void EncryptFileInPlace(string fileName)
+        {
+            var fullPath = Path.Combine(TargetDocsFolder, fileName);
+            if (!File.Exists(fullPath))
+                throw new PathNotFoundException(fullPath);
+
+            var decryptedBytes = File.ReadAllBytes(fullPath);
+            EncryptBytesToFile(decryptedBytes, fullPath, EncryptionKey);
+        }
+
         private void EncryptFile(string inputPath, string outputPath, string key)
         {
             using var aes = Aes.Create();
             aes.Key = Encoding.UTF8.GetBytes(key);
-            aes.GenerateIV(); // كل ملف IV مختلف
+            aes.GenerateIV(); // unique IV per file
 
             using var outFs = new FileStream(outputPath, FileMode.Create, FileAccess.Write);
-            // أول حاجة نخزنها في الملف هي IV
-            outFs.Write(aes.IV, 0, aes.IV.Length);
+            outFs.Write(aes.IV, 0, aes.IV.Length); // write IV at start
 
             using var cryptoStream = new CryptoStream(outFs, aes.CreateEncryptor(), CryptoStreamMode.Write);
             using var inFs = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
             inFs.CopyTo(cryptoStream);
+        }
+
+        private void EncryptBytesToFile(byte[] plainBytes, string outputPath, string key)
+        {
+            using var aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.GenerateIV();
+
+            using var outFs = new FileStream(outputPath, FileMode.Create, FileAccess.Write);
+            outFs.Write(aes.IV, 0, aes.IV.Length);
+
+            using var cryptoStream = new CryptoStream(outFs, aes.CreateEncryptor(), CryptoStreamMode.Write);
+            cryptoStream.Write(plainBytes, 0, plainBytes.Length);
         }
 
         private byte[] DecryptFileToBytes(string inputPath, string key)
@@ -78,7 +108,6 @@ namespace Reports.Service.SaveReport
             aes.Key = Encoding.UTF8.GetBytes(key);
 
             using var inFs = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
-            // اقرأ IV من أول الملف
             var iv = new byte[aes.BlockSize / 8];
             inFs.Read(iv, 0, iv.Length);
             aes.IV = iv;

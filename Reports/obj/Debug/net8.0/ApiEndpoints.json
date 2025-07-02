@@ -289,10 +289,52 @@
     "ContainingType": "Reports.Controllers.ReportsController",
     "Method": "CreateDailyDeputyReport",
     "RelativePath": "api/Reports/create-daily-deputy-report",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "LockReport",
+    "RelativePath": "api/Reports/lock-report/{reportId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "GetMyAvailableReports",
+    "RelativePath": "api/Reports/my-available-reports",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "UnlockReport",
+    "RelativePath": "api/Reports/unlock-report/{reportId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

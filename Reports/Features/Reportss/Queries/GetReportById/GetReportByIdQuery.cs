@@ -40,7 +40,7 @@ namespace Reports.Features.Reportss.Queries.GetReportById
                         Approvals = r.Approvals.Select(a => new GetReportApprovalModel
                         {
                             Geha = a.Geha,
-                            IsApproved = a.IsApproved,
+                            ApprovalStatus = a.ApprovalStatus.ToString(),
                             ApprovalDate = a.ApprovalDate
                         }).ToList()
                     })

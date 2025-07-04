@@ -37,10 +37,14 @@ namespace Reports.Features.Approval.Commands.ApproveReport
 
 
             // 🔒 Check: has user already approved before for this report & level?
-            var alreadyApproved = report.Approvals.Any(a =>
-                a.UserId == _currentUserService.UserId && a.IsApproved && a.Geha == user.Geha);
+            var alreadyApprovedInCurrentLevel = report.Approvals.Any(a =>
+                    a.UserId == _currentUserService.UserId
+                    && a.Geha == user.Geha
+                    && a.ApprovalStatus == ApprovalStatus.Approved
+                    && report.CurrentApprovalLevel.ToString() == user.Level.ToString());
 
-            if (alreadyApproved)
+
+            if (alreadyApprovedInCurrentLevel)
             {
                 throw new BadRequestException("You have already approved this report at this level.");
             }
@@ -112,7 +116,8 @@ namespace Reports.Features.Approval.Commands.ApproveReport
                         ?? throw new NotFoundException(nameof(Report), reportId);
 
                     // Check if this geha is not make approved before
-                    return !report.Approvals.Any(a => _currentUserService.Geha == a.Geha && a.IsApproved);
+                    return !report.Approvals.Any(a => a.Geha == _currentUserService.Geha && a.ApprovalStatus == ApprovalStatus.Approved && report.CurrentApprovalLevel == a.User?.Level);
+
                 })
                 .WithMessage("This geha has already approved this report.");
 

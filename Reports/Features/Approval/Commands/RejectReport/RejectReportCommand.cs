@@ -32,13 +32,16 @@ namespace Reports.Features.Approval.Commands.RejectReport
                 .FirstOrDefaultAsync(r => r.Id == request.ReportId, cancellationToken)
                 ?? throw new NotFoundException(nameof(Report), request.ReportId);
 
-            // Check: has user already approved this report at this level → if so, can reject only if still in same level
-            var alreadyApproved = report.Approvals.Any(a =>
-                a.UserId == _currentUserService.UserId && a.IsApproved && a.Geha == user.Geha);
+            // Check: has user already approved this report at this level
+            var alreadyApprovedInCurrentLevel = report.Approvals.Any(a =>
+                a.UserId == _currentUserService.UserId
+                && a.Geha == user.Geha
+                && a.ApprovalStatus == ApprovalStatus.Approved
+                && user.Level == report.CurrentApprovalLevel);  // نتأكد انها للمستوى الحالي فقط
 
-            if (alreadyApproved && report.CurrentApprovalLevel != user.Level)
+            if (alreadyApprovedInCurrentLevel)
             {
-                throw new BadRequestException("You have already approved this report at this level; you can't reject after moving to higher level.");
+                throw new BadRequestException("You have already approved this report at this level; you can't reject now.");
             }
 
             // 👍 Everything is valid → reject
@@ -88,6 +91,4 @@ namespace Reports.Features.Approval.Commands.RejectReport
                 .WithMessage("You are not allowed to reject this report based on your level.");
         }
     }
-
-
 }

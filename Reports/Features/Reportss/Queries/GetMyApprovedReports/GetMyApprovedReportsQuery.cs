@@ -16,81 +16,74 @@ namespace Reports.Features.Reportss.Queries.GetMyApprovedReports
     }
 
     public class GetMyApprovedReportsQueryHandler(
-             AppDbContext _context,
-             ICurrentUserService _currentUserService
-           ) : ICommandHandler<GetMyApprovedReportsQuery, PagedList<GetAllReportModel>>
+         AppDbContext _context,
+         ICurrentUserService _currentUserService
+       ) : ICommandHandler<GetMyApprovedReportsQuery, PagedList<GetAllReportModel>>
     {
         public async Task<PagedList<GetAllReportModel>> Handle(GetMyApprovedReportsQuery request, CancellationToken cancellationToken)
         {
+            var allowedFields = new List<string> { "Id", "reportType", "GehaCode", "ShoabaName", "Description", "CreatedAt" };
+            var allowedSorting = new List<string> { "Id", "CreatedAt" };
 
-            try
+            request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
+
+            // Step 1: Get approvals for current user where status is Approved
+            var approvalsQuery = _context.Approval
+                .Include(a => a.Report)
+                .Where(a => a.UserId == _currentUserService.UserId && a.ApprovalStatus == ApprovalStatus.Approved)
+                .AsNoTracking()
+                .AsQueryable();
+
+            // Step 2: Apply search
+            if (!string.IsNullOrEmpty(request.Search))
             {
-                var allowedFields = new List<string> { "Id", "reportType", "GehaCode", "ShoabaName", "Description", "CreatedAt" };
-                var allowedSorting = new List<string> { "Id", "CreatedAt" };
-
-                request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
-
-                // Fetch the reports from the database
-                var queryAll = _context.Approval
-                    .Include(r => r.Report)
-                    .Where(r => r.UserId == _currentUserService.UserId)
-                    .AsQueryable();
-
-                // Apply search filter if provided
-                if (!string.IsNullOrEmpty(request.Search))
-                {
-                    queryAll = queryAll.Where(r => r.Report!.GehaCode.Contains(request.Search) || r.Report.ShoabaName.Contains(request.Search) || r.Report.Description.Contains(request.Search));
-                }
-
-                if (request.Filters != null && request.Filters.TryGetValue("reportType", out string? reportType))
-                {
-                    if (Enum.TryParse<ReportType>(reportType, true, out var type))
-                    {
-                        queryAll = queryAll.Where(o => o.Report!.ReportType == type);
-
-                        // remove from filters
-                        request.Filters.Remove("productType");
-                    }
-                    else
-                    {
-                        throw new BadRequestException("Invalid productType value.");
-                    }
-                }
-
-                var query = queryAll
-                    .Select(r => new GetAllReportModel
-                    {
-                        Id = r.Id,
-                        ReportType = r.Report!.ReportType.ToArabic(),
-                        GehaCode = r.Report.GehaCode,
-                        ShoabaName = r.Report.ShoabaName,
-                        Description = r.Report.Description,
-                        CreatedAt = r.Report.CreatedAt,
-                        CurrentApprovalLevel = r.Report.CurrentApprovalLevel.ToString(),
-                        IsApprovedByRA = r.Report.IsApprovedByRA,
-                        IsRejected = r.Report.IsRejected,
-                        FilePath = r.Report.FilePath,
-                    })
-                    .ApplyFilters(request.Filters)
-                    .ApplyDateRangeFilter(request.StartRange, request.EndRange)
-                    .ApplySorting(request.SortBy, request.SortDirection)
-                    .AsQueryable()
-                    ?? throw new NotFoundException("Cart item not found");
-
-
-                // Paginate the result
-                var result = await PagedList<GetAllReportModel>.CreateAsync(query, request.PageNumber, request.PageSize, cancellationToken);
-
-                return result;
-
-
+                approvalsQuery = approvalsQuery.Where(a =>
+                    a.Report!.GehaCode.Contains(request.Search) ||
+                    a.Report.ShoabaName.Contains(request.Search) ||
+                    a.Report.Description.Contains(request.Search));
             }
-            catch (Exception ex)
+
+            // Step 3: Apply filters
+            if (request.Filters != null && request.Filters.TryGetValue("reportType", out string? reportType))
             {
-                // Log the exception
-                throw new BadRequestException(ex.Message);
+                if (Enum.TryParse<ReportType>(reportType, true, out var type))
+                {
+                    approvalsQuery = approvalsQuery.Where(a => a.Report!.ReportType == type);
+                    request.Filters.Remove("reportType");
+                }
+                else
+                {
+                    throw new BadRequestException("Invalid reportType value.");
+                }
             }
+
+            // Step 4: Project to model
+            var reportModelsQuery = approvalsQuery
+                .Select(a => new GetAllReportModel
+                {
+                    Id = a.Report!.Id,
+                    ReportType = a.Report.ReportType.ToArabic(),
+                    GehaCode = a.Report.GehaCode,
+                    ShoabaName = a.Report.ShoabaName,
+                    Description = a.Report.Description,
+                    CreatedAt = a.Report.CreatedAt,
+                    CurrentApprovalLevel = a.Report.CurrentApprovalLevel.ToString(),
+                    IsApprovedByRA = a.Report.IsApprovedByRA,
+                    IsRejected = a.Report.IsRejected,
+                    FilePath = a.Report.FilePath
+                })
+                .ApplyFilters(request.Filters)
+                .ApplyDateRangeFilter(request.StartRange, request.EndRange)
+                .ApplySorting(request.SortBy, request.SortDirection);
+
+            // Step 5: Paginate & return
+            var result = await PagedList<GetAllReportModel>.CreateAsync(
+                reportModelsQuery,
+                request.PageNumber,
+                request.PageSize,
+                cancellationToken);
+
+            return result;
         }
     }
-
 }

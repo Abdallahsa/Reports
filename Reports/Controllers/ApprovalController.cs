@@ -4,6 +4,7 @@ using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
 using Reports.Features.Approval.Commands.ApproveReport;
 using Reports.Features.Approval.Commands.RejectReport;
+using Reports.Features.Approval.Queries.GetReportApprovalHistory;
 using Reports.Features.Approval.Queries.GetTodayPendingApprovalReports;
 using Reports.Features.Reportss.Model;
 using Reports.Features.Reportss.Queries.GetMyApprovedReports;
@@ -47,6 +48,16 @@ namespace Reports.Controllers
         {
             return await _mediator.Send(query);
 
+        }
+
+        // endpoint to return all history of reports i approved
+        [Authorize]
+        [HttpPost("{reportId}/approval-history")]
+        public async Task<IActionResult> GetReportApprovalHistory(int reportId)
+        {
+            var query = new GetReportApprovalHistoryQuery { ReportId = reportId };
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
     }

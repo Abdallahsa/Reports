@@ -1,5 +1,8 @@
-﻿using Reports.Api.Common.Abstractions.Collections;
+﻿using Microsoft.EntityFrameworkCore;
+using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Data;
+using Reports.Api.Domain.Entities;
+using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
@@ -19,92 +22,89 @@ namespace Reports.Features.Reportss.Queries.GetAllReport
     //Create handler for GetAllReportQuery
 
     public class GetAllReportQueryHandler(
-        AppDbContext context,
-        IUserReportService _userReportService
-
-        ) : ICommandHandler<GetAllReportQuery, PagedList<GetAllReportModel>>
+     AppDbContext context,
+     IUserReportService _userReportService,
+     ICurrentUserService _currentUserService
+ ) : ICommandHandler<GetAllReportQuery, PagedList<GetAllReportModel>>
     {
         public async Task<PagedList<GetAllReportModel>> Handle(GetAllReportQuery request, CancellationToken cancellationToken)
         {
             try
             {
-
                 var allowedFields = new List<string> { "Id", "reportType", "GehaCode", "ShoabaName", "Description" };
                 var allowedSorting = new List<string> { "Id", "reportType", "CreatedAt" };
 
                 request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
 
-                // useing service IUserReportService to get allowed reports for current user and using where 
+                // 🧑‍💻 Get current user
+                var user = await context.Users
+                    .FirstOrDefaultAsync(u => u.Id == _currentUserService.UserId, cancellationToken)
+                    ?? throw new NotFoundException(nameof(User), _currentUserService.UserId);
+
+                // Get allowed reports for current user
                 var allowedReports = _userReportService.GetAllowedReportsForCurrentUser();
 
-                var queryAll = context
-                    .Reports
-                    .Where(r => allowedReports.Contains(r.ReportType) && r.IsApprovedByRA == request.Archive)
-                    .AsQueryable();
+                var queryAll = context.Reports
+                    .Where(r => allowedReports.Contains(r.ReportType) && r.IsApprovedByRA == request.Archive);
+
+                // لو LevelZero → نرجع فقط التقارير من نوعين معينين
+                if (user.Level == Level.LevelZero)
+                {
+                    queryAll = queryAll.Where(r => r.ReportType == ReportType.DailyDeputyReport || r.ReportType == ReportType.DailyOperationsReport);
+                }
 
                 // Apply search filter if provided
                 if (!string.IsNullOrEmpty(request.Search))
                 {
-                    queryAll = queryAll.Where(r => r.GehaCode.Contains(request.Search) || r.ShoabaName.Contains(request.Search) || r.Description.Contains(request.Search));
+                    queryAll = queryAll.Where(r =>
+                        r.GehaCode.Contains(request.Search) ||
+                        r.ShoabaName.Contains(request.Search) ||
+                        r.Description.Contains(request.Search));
                 }
 
-
-
+                // Filter by reportType
                 if (request.Filters != null && request.Filters.TryGetValue("reportType", out string? reportType))
                 {
                     if (Enum.TryParse<ReportType>(reportType, true, out var type))
                     {
-                        queryAll = queryAll.Where(o => o.ReportType == type);
-
-                        // remove from filters
-                        request.Filters.Remove("productType");
+                        queryAll = queryAll.Where(r => r.ReportType == type);
+                        request.Filters.Remove("reportType"); // remove it after use
                     }
                     else
                     {
-                        throw new BadRequestException("Invalid productType value.");
+                        throw new BadRequestException("Invalid reportType value.");
                     }
                 }
 
                 var query = queryAll
-                .Select(r => new GetAllReportModel
-                {
-                    Id = r.Id,
-                    ReportType = r.ReportType.ToArabic(),
-                    GehaCode = r.GehaCode,
-                    ShoabaName = r.ShoabaName,
-                    Description = r.Description,
-                    CreatedAt = r.CreatedAt,
-                    CurrentApprovalLevel = r.CurrentApprovalLevel.ToString(),
-                    IsApprovedByRA = r.IsApprovedByRA,
-                    IsRejected = r.IsRejected,
-                    FilePath = r.FilePath,
-                })
-                .ApplyFilters(request.Filters)
-                .ApplyDateRangeFilter(request.StartRange, request.EndRange)
-                .ApplySorting(request.SortBy, request.SortDirection)
-                .AsQueryable()
-                ?? throw new NotFoundException("Cart item not found");
+                    .Select(r => new GetAllReportModel
+                    {
+                        Id = r.Id,
+                        ReportType = r.ReportType.ToArabic(),
+                        GehaCode = r.GehaCode,
+                        ShoabaName = r.ShoabaName,
+                        Description = r.Description,
+                        CreatedAt = r.CreatedAt,
+                        CurrentApprovalLevel = r.CurrentApprovalLevel.ToString(),
+                        IsApprovedByRA = r.IsApprovedByRA,
+                        IsRejected = r.IsRejected,
+                        FilePath = r.FilePath,
+                    })
+                    .ApplyFilters(request.Filters)
+                    .ApplyDateRangeFilter(request.StartRange, request.EndRange)
+                    .ApplySorting(request.SortBy, request.SortDirection)
+                    .AsQueryable();
 
-
-                // Paginate the result
+                // Paginate
                 var result = await PagedList<GetAllReportModel>.CreateAsync(query, request.PageNumber, request.PageSize, cancellationToken);
 
                 return result;
-
-
             }
-
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-
-
+                throw new BadRequestException(ex.Message);
             }
         }
-
-
-
-
-
     }
+
 }

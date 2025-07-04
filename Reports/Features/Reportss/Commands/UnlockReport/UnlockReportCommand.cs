@@ -23,14 +23,14 @@ namespace Reports.Features.Reportss.Commands.UnlockReport
                 ?? throw new NotFoundException(nameof(Report), request.ReportId);
 
             if (report.Status == FileStatus.Unlocked)
-                throw new InvalidOperationException("⚠️ الملف بالفعل مفتوح!");
+                throw new InvalidOperationException("the file is already unlocked. No action needed.");
 
             _templateReportService.DecryptFileInPlace(report.FilePath);
 
             report.Status = FileStatus.Unlocked;
             await _context.SaveChangesAsync(cancellationToken);
 
-            return "✅ تم فك التشفير والملف أصبح مفتوح.";
+            return "File unlocked successfully.";
         }
     }
 
@@ -39,7 +39,7 @@ namespace Reports.Features.Reportss.Commands.UnlockReport
         public UnlockReportCommandValidator()
         {
             RuleFor(x => x.ReportId)
-                .GreaterThan(0).WithMessage("ReportId يجب أن يكون رقم صحيح أكبر من صفر");
+                .GreaterThan(0).WithMessage("Report ID must be greater than zero.");
         }
     }
 

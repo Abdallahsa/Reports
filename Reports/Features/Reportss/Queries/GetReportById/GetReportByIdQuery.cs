@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Reports.Api.Data;
+using Reports.Api.Domain.Entities;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
+using Reports.Domain.Entities;
 using Reports.Features.Reportss.Model;
 
 namespace Reports.Features.Reportss.Queries.GetReportById
@@ -14,7 +16,11 @@ namespace Reports.Features.Reportss.Queries.GetReportById
     }
 
     // Handler for GetReportByIdQuery
-    public class GetReportByIdQueryHandler(AppDbContext _context) : ICommandHandler<GetReportByIdQuery, GetReportByIdModel>
+    public class GetReportByIdQueryHandler
+        (
+        AppDbContext _context,
+        ICurrentUserService _currentUserService
+        ) : ICommandHandler<GetReportByIdQuery, GetReportByIdModel>
     {
 
 
@@ -22,9 +28,21 @@ namespace Reports.Features.Reportss.Queries.GetReportById
         {
             try
             {
+                // جيب المستخدم الحالي
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Id == _currentUserService.UserId, cancellationToken)
+                    ?? throw new NotFoundException(nameof(User), _currentUserService.UserId);
 
-                var report = await _context.Reports
-                    .Where(r => r.Id == request.Id)
+                var query = _context.Reports
+                    .Where(r => r.Id == request.Id);
+
+
+                if (user.Level == Level.LevelZero)
+                {
+                    query = query.Where(r => r.ReportType == ReportType.DailyDeputyReport || r.ReportType == ReportType.DailyOperationsReport);
+                }
+
+                var report = await query
                     .Select(r => new GetReportByIdModel
                     {
                         Id = r.Id,

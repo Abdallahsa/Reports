@@ -11,6 +11,9 @@ namespace Reports.Api.Domain.Entities
         public string SignaturePath { get; set; } = string.Empty;
 
         public ICollection<ReportApproval> Approvals { get; set; } = new List<ReportApproval>();
+        public ICollection<Notification> SentNotifications { get; set; } = new List<Notification>();
+
+        public ICollection<Notification> ReceivedNotifications { get; set; } = new List<Notification>();
     }
 
     public enum Level

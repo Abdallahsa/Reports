@@ -23,14 +23,14 @@ namespace Reports.Features.Reportss.Commands.LockReport
                 ?? throw new NotFoundException(nameof(Report), request.ReportId);
 
             if (report.Status == FileStatus.Locked)
-                throw new InvalidOperationException("⚠️ الملف بالفعل مقفول!");
+                throw new InvalidOperationException(" the file is already locked. No action needed.");
 
             _templateReportService.EncryptFileInPlace(report.FilePath);
 
             report.Status = FileStatus.Locked;
             await _context.SaveChangesAsync(cancellationToken);
 
-            return "✅ تم قفل الملف وإعادة تشفيره.";
+            return "File locked successfully.";
         }
     }
 
@@ -39,7 +39,7 @@ namespace Reports.Features.Reportss.Commands.LockReport
         public LockReportCommandValidator()
         {
             RuleFor(x => x.ReportId)
-                .GreaterThan(0).WithMessage("ReportId يجب أن يكون رقم صحيح أكبر من صفر");
+                .GreaterThan(0).WithMessage("ReportID is Required .");
         }
     }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
+using Reports.Api.Domain.Constants;
 using Reports.Api.Domain.Entities;
 using Reports.Features.Reportss.Commands.CreateReport;
 using Reports.Features.Reportss.Commands.LockReport;
@@ -20,15 +21,16 @@ namespace Reports.Controllers
 
 
         [HttpPost("create")]
-        [Authorize]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> CreateReport([FromForm] CreateReportCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
 
 
-        [Authorize]
+
         [HttpPost("unlock-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> UnlockReport(int reportId)
         {
             var result = await _mediator.Send(new UnlockReportCommand { ReportId = reportId });
@@ -36,8 +38,9 @@ namespace Reports.Controllers
         }
 
 
-        [Authorize]
+
         [HttpPost("lock-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> LockReport(int reportId)
         {
             var result = await _mediator.Send(new LockReportCommand { ReportId = reportId });
@@ -48,7 +51,7 @@ namespace Reports.Controllers
 
         // endpoint to return all reports 
         [HttpPost("all-reports")]
-        [Authorize()]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<PagedList<GetAllReportModel>> GetAllReports(GetAllReportQuery query)
         {
             return await _mediator.Send(query);
@@ -57,8 +60,9 @@ namespace Reports.Controllers
 
 
         // endpoint to return report by id
-        [Authorize]
+
         [HttpGet("{id}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> GetReportById(int id)
         {
             var result = await _mediator.Send(new GetReportByIdQuery { Id = id });
@@ -88,7 +92,6 @@ namespace Reports.Controllers
             var statuses = Enum.GetNames<Level>();
             return Ok(statuses);
         }
-
 
 
 

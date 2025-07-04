@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Reports.Api.Data;
 
@@ -11,9 +12,11 @@ using Reports.Api.Data;
 namespace Reports.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250704160624_Add-Notification-Table")]
+    partial class AddNotificationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,7 +153,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens", (string)null);
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("Reports.Api.Domain.Entities.Role", b =>
@@ -286,7 +289,7 @@ namespace Reports.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ForgotPasswordRequests", (string)null);
+                    b.ToTable("ForgotPasswordRequests");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Notification", b =>
@@ -329,7 +332,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Notification", (string)null);
+                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Report", b =>
@@ -378,7 +381,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("ReportType");
 
-                    b.ToTable("Reports", (string)null);
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.ReportApproval", b =>
@@ -411,7 +414,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Approval", (string)null);
+                    b.ToTable("Approval");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

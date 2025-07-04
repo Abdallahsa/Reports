@@ -13,7 +13,7 @@ using Reports.Service.GehaService;
 
 namespace Reports.Features.Approval.Queries.GetTodayPendingApprovalReports
 {
-    public class GetTodayPendingApprovalReportsQuery : HasTableView, ICommand<PagedList<GetAllReportModel>>
+    public class GetTodayPendingApprovalReportsQuery : HasPagination, ICommand<PagedList<GetAllReportModel>>
     {
     }
 

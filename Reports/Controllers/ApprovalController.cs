@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
+using Reports.Api.Domain.Constants;
 using Reports.Features.Approval.Commands.ApproveReport;
 using Reports.Features.Approval.Commands.RejectReport;
 using Reports.Features.Approval.Queries.GetReportApprovalHistory;
@@ -16,24 +17,24 @@ namespace Reports.Controllers
     public class ApprovalController : BaseController
     {
 
-        [Authorize]
         [HttpPost("approve-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> ApproveReport(int reportId)
         {
             await _mediator.Send(new ApproveReportCommand { ReportId = reportId });
             return Ok("Report approved successfully");
         }
 
-        [Authorize]
         [HttpPost("reject-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> RejectReport(int reportId)
         {
             await _mediator.Send(new RejectReportCommand { ReportId = reportId });
             return Ok("Report rejected successfully");
         }
 
-        [Authorize]
         [HttpPost("today-pending")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> GetTodayPendingApprovalReports(GetTodayPendingApprovalReportsQuery query)
         {
             var result = await _mediator.Send(query);
@@ -42,8 +43,8 @@ namespace Reports.Controllers
 
 
         // endpoint to return all reports i marked approved
-        [Authorize]
         [HttpPost("my-approved-reports")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<PagedList<GetAllReportModel>> GetMyApprovedReports(GetMyApprovedReportsQuery query)
         {
             return await _mediator.Send(query);
@@ -51,8 +52,8 @@ namespace Reports.Controllers
         }
 
         // endpoint to return all history of reports i approved
-        [Authorize]
         [HttpPost("{reportId}/approval-history")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> GetReportApprovalHistory(int reportId)
         {
             var query = new GetReportApprovalHistoryQuery { ReportId = reportId };

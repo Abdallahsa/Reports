@@ -1,6 +1,9 @@
 ﻿using Reports.Api.Auth.Services;
 using Reports.Api.Services;
 using Reports.Api.Services.CurrentUser;
+using Reports.Service.ApprovalService;
+using Reports.Service.GehaService;
+using Reports.Service.ReportService;
 using Reports.Service.SaveReport;
 
 namespace Reports.Api.Configurations
@@ -17,6 +20,9 @@ namespace Reports.Api.Configurations
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<ITemplateReportService, TemplateReportService>();
+            services.AddScoped<IUserReportService, UserReportService>();
+            services.AddScoped<IUserGehaService, UserGehaService>();
+            services.AddScoped<IReportApprovalService, ReportApprovalService>();
 
 
             //services.AddSingleton(services => new MapperConfiguration(cfg =>

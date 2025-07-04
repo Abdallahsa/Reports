@@ -1,9 +1,9 @@
-﻿using Reports.Api.Data;
-using Reports.Api.Domain.Entities;
-using Reports.Api.Settings;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Reports.Api.Data;
+using Reports.Api.Domain.Entities;
+using Reports.Api.Settings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -67,11 +67,11 @@ namespace Reports.Api.Auth.Services
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
             };
 
-            // add user type
-            var level = GetUserLevel(user);
-            if (level != null)
+            // add user geha
+            var geha = GetUserLevel(user);
+            if (geha != null)
             {
-                claims.Add(new Claim("Level", level));
+                claims.Add(new Claim("Geha", geha));
             }
 
             // Fetch roles and add them as claims

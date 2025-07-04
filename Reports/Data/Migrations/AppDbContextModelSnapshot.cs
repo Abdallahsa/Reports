@@ -280,9 +280,13 @@ namespace Reports.Data.Migrations
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ForgotPasswordRequest");
+                    b.ToTable("ForgotPasswordRequests");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Report", b =>
@@ -295,6 +299,9 @@ namespace Reports.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CurrentApprovalLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -309,6 +316,9 @@ namespace Reports.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsApprovedByRA")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRejected")
                         .HasColumnType("bit");
 
                     b.Property<int>("ReportType")
@@ -339,15 +349,15 @@ namespace Reports.Data.Migrations
                     b.Property<DateTime?>("ApprovalDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Geha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("bit");
 
                     b.Property<int>("ReportId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

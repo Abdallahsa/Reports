@@ -33,7 +33,14 @@ namespace Reports.Api.Domain.Entities
         Eshara,
         Operations,
         Tahrokat,
-        None 
+        Elc,
+        Mar,
+        Rader,
+        Sar,
+        Sat,
+        Tash,
+        None
     }
+
 
 }

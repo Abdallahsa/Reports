@@ -1,8 +1,8 @@
-﻿using Reports.Api.Auth.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Reports.Api.Auth.Models;
 using Reports.Api.Auth.Services;
 using Reports.Api.Data;
 using Reports.Common.Abstractions.Mediator;
-using Microsoft.EntityFrameworkCore;
 
 namespace Reports.Api.Features.Auth.Commands.RefreshToken
 {
@@ -51,7 +51,7 @@ namespace Reports.Api.Features.Auth.Commands.RefreshToken
                     TokenExpiryInMinutes = tokenGenerator.TokenExpiryInMinutes,
                     RefreshToken = refreshToken.Token, // return the same refresh token
                     UserId = user.Id,
-                    level = user.Level.ToString(),
+                    Geha = user.Geha.ToString(),
                     Roles = await authService.GetRolesAsync(user)
                 };
 

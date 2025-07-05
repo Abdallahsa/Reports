@@ -11,6 +11,9 @@ namespace Reports.Api.Domain.Entities
         public string SignaturePath { get; set; } = string.Empty;
 
         public ICollection<ReportApproval> Approvals { get; set; } = new List<ReportApproval>();
+        public ICollection<Notification> SentNotifications { get; set; } = new List<Notification>();
+
+        public ICollection<Notification> ReceivedNotifications { get; set; } = new List<Notification>();
     }
 
     public enum Level
@@ -33,7 +36,14 @@ namespace Reports.Api.Domain.Entities
         Eshara,
         Operations,
         Tahrokat,
-        None 
+        Elc,
+        Mar,
+        Rader,
+        Sar,
+        Sat,
+        Tash,
+        None
     }
+
 
 }

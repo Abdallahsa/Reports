@@ -26,8 +26,10 @@ namespace Manzoma.Api.Data.Seeders
                 // seed Admins
                 await AdminSeeder.SeedAdmins(userManager);
 
-               
-              
+                // seed users for testing approval
+                await UserSeeder.SeedApprovalUsers(userManager);
+
+
 
 
             }

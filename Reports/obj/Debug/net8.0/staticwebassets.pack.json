@@ -5,6 +5,30 @@
       "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-06-30-AZ-DailyDeputyReport.docx"
     },
     {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-01-AZ-DailyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-01-AZ-DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-02-AZ-DailyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-02-AZ-DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-03-AZ-DailyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-03-AZ-DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-03-AZ-DailyOperationsReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-03-AZ-DailyOperationsReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-04-AZ-DailyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-04-AZ-DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-04-AZ-DailyOperationsReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Docs\\2025-07-04-AZ-DailyOperationsReport.docx"
+    },
+    {
       "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Images\\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png",
       "PackagePath": "staticwebassets\\StaticFiles\\Images\\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png"
     },
@@ -25,8 +49,24 @@
       "PackagePath": "staticwebassets\\StaticFiles\\Images\\9040c48e-1fe0-4a0b-be72-3d6d4193a45f_cute-word-thank-you-cartoon-style-illustration-vector.jpg"
     },
     {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Templets\\AirDefenseEmergencyDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Templets\\AirDefenseEmergencyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Templets\\BrigadeDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Templets\\BrigadeDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Templets\\ChiefOfStaffDeputyReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Templets\\ChiefOfStaffDeputyReport.docx"
+    },
+    {
       "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Templets\\DailyDeputyReport.docx",
       "PackagePath": "staticwebassets\\StaticFiles\\Templets\\DailyDeputyReport.docx"
+    },
+    {
+      "Id": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Templets\\DailyOperationsReport.docx",
+      "PackagePath": "staticwebassets\\StaticFiles\\Templets\\DailyOperationsReport.docx"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Reports.Microsoft.AspNetCore.StaticWebAssets.props",

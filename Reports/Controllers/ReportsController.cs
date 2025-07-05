@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
 using Reports.Api.Domain.Constants;
-using Reports.Features.Reportss.Commands.CreateDailyDeputyReport;
+using Reports.Api.Domain.Entities;
+using Reports.Features.Reportss.Commands.CreateReport;
 using Reports.Features.Reportss.Commands.LockReport;
 using Reports.Features.Reportss.Commands.UnlockReport;
+using Reports.Features.Reportss.Model;
+using Reports.Features.Reportss.Queries.GetAllReport;
 using Reports.Features.Reportss.Queries.GetAvailableReportTypes;
-using Reports.Service.SaveReport;
+using Reports.Features.Reportss.Queries.GetReportById;
 
 namespace Reports.Controllers
 {
@@ -15,16 +19,18 @@ namespace Reports.Controllers
     public class ReportsController() : BaseController
     {
 
-        [HttpPost("create-daily-deputy-report")]
-        [Authorize(Roles = RoleConstants.LevelZero)]
-        public async Task<IActionResult> CreateDailyDeputyReport()
-        {
-            return Ok(await _mediator.Send(new CreateDailyDeputyReportCommand { }));
 
+        [HttpPost("create")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
+        public async Task<IActionResult> CreateReport([FromForm] CreateReportCommand command)
+        {
+            return Ok(await _mediator.Send(command));
         }
 
-        [Authorize]
+
+
         [HttpPost("unlock-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> UnlockReport(int reportId)
         {
             var result = await _mediator.Send(new UnlockReportCommand { ReportId = reportId });
@@ -32,8 +38,9 @@ namespace Reports.Controllers
         }
 
 
-        [Authorize]
+
         [HttpPost("lock-report/{reportId}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
         public async Task<IActionResult> LockReport(int reportId)
         {
             var result = await _mediator.Send(new LockReportCommand { ReportId = reportId });
@@ -43,13 +50,26 @@ namespace Reports.Controllers
 
 
         // endpoint to return all reports 
-        [HttpGet("all-reports")]
-        [Authorize(Roles = RoleConstants.LevelZero)]
-        public async Task<IActionResult> GetAllReports()
+        [HttpPost("all-reports")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
+        public async Task<PagedList<GetAllReportModel>> GetAllReports(GetAllReportQuery query)
         {
+            return await _mediator.Send(query);
 
-            return Ok("This endpoint will return all reports.");
         }
+
+
+        // endpoint to return report by id
+
+        [HttpGet("{id}")]
+        [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
+        public async Task<IActionResult> GetReportById(int id)
+        {
+            var result = await _mediator.Send(new GetReportByIdQuery { Id = id });
+            return Ok(result);
+        }
+
+
 
         [Authorize]
         [HttpGet("my-available-reports")]
@@ -59,20 +79,22 @@ namespace Reports.Controllers
             return Ok(result);
         }
 
+        [HttpGet("Geha-list")]
+        public ActionResult<ICollection<string>> GetGehaStatus()
+        {
+            var statuses = Enum.GetNames<Geha>();
+            return Ok(statuses);
+        }
 
-        //[Authorize]
-        //[HttpGet("preview-report/{fileName}")]
-        //public IActionResult PreviewReport(string fileName)
-        //{
-        //    var decryptedBytes = templateReportService.GetDecryptedFile(fileName);
+        [HttpGet("Level-list")]
+        public ActionResult<ICollection<string>> GetLevelStatus()
+        {
+            var statuses = Enum.GetNames<Level>();
+            return Ok(statuses);
+        }
 
-        //    var contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-        //    // نطلب من المتصفح إنه يعرض الملف inline بدل download
-        //    Response.Headers.Add("Content-Disposition", $"inline; filename=\"{fileName}\"");
 
-        //    return File(decryptedBytes, contentType);
-        //}
 
     }
 

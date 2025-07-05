@@ -13,6 +13,8 @@ namespace Reports.Api.Data
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<ReportApproval> Approval { get; set; }
+        public DbSet<ForgotPasswordRequest> ForgotPasswordRequests { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
 
         public AppDbContext(DbContextOptions options) : base(options)

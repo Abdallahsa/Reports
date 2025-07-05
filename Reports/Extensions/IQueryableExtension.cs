@@ -1,5 +1,4 @@
 ﻿using System.Linq.Dynamic.Core;
-using Reports.Api.Services.CurrentUser;
 
 namespace TwoHO.Api.Extensions
 {
@@ -122,26 +121,26 @@ namespace TwoHO.Api.Extensions
         //    return query;
         //}
 
-        //public static IQueryable<T> ApplyDateRangeFilter<T>(this IQueryable<T> query, DateTime? startDate, DateTime? endDate, string dateProperty = "CreatedAt")
-        //{
-        //    // If only StartDate is provided, filter all records from that date onward
-        //    if (startDate.HasValue && !endDate.HasValue)
-        //    {
-        //        query = query.Where($"{dateProperty} >= @0", startDate.Value);
-        //    }
-        //    // If only EndDate is provided, filter all records up until that date
-        //    else if (!startDate.HasValue && endDate.HasValue)
-        //    {
-        //        query = query.Where($"{dateProperty} <= @0", endDate.Value);
-        //    }
-        //    // If both StartDate and EndDate are provided, filter between the dates
-        //    else if (startDate.HasValue && endDate.HasValue)
-        //    {
-        //        query = query.Where($"{dateProperty} >= @0 && {dateProperty} <= @1", startDate.Value, endDate.Value);
-        //    }
+        public static IQueryable<T> ApplyDateRangeFilter<T>(this IQueryable<T> query, DateTime? startDate, DateTime? endDate, string dateProperty = "CreatedAt")
+        {
+            // If only StartDate is provided, filter all records from that date onward
+            if (startDate.HasValue && !endDate.HasValue)
+            {
+                query = query.Where($"{dateProperty} >= @0", startDate.Value);
+            }
+            // If only EndDate is provided, filter all records up until that date
+            else if (!startDate.HasValue && endDate.HasValue)
+            {
+                query = query.Where($"{dateProperty} <= @0", endDate.Value);
+            }
+            // If both StartDate and EndDate are provided, filter between the dates
+            else if (startDate.HasValue && endDate.HasValue)
+            {
+                query = query.Where($"{dateProperty} >= @0 && {dateProperty} <= @1", startDate.Value, endDate.Value);
+            }
 
-        //    return query;
-        //}
+            return query;
+        }
 
         ////method filter price range 
         //public static IQueryable<T> ApplyPriceRangeFilter<T>(this IQueryable<T> query, decimal? minPrice, decimal? maxPrice)

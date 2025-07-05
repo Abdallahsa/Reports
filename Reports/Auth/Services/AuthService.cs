@@ -5,10 +5,9 @@ using Reports.Api.Auth.Models;
 using Reports.Api.Data;
 using Reports.Api.Domain.Constants;
 using Reports.Api.Domain.Entities;
-using Reports.Api.Services.CurrentUser;
+using Reports.Api.Services;
 using Reports.Application.Auth.Models;
 using Reports.Common.Exceptions;
-using Reports.Api.Services;
 
 namespace Reports.Api.Auth.Services
 {
@@ -17,8 +16,7 @@ namespace Reports.Api.Auth.Services
         RoleManager<Role> roleManager,
         UserManager<User> userManager,
         ITokenGenerator tokenGenerator,
-        IStorageService _storageService,
-        ICurrentUserService currentUserService
+        IStorageService _storageService
         ) : IAuthService
     {
 
@@ -35,7 +33,7 @@ namespace Reports.Api.Auth.Services
                 EmailConfirmed = true,
                 Level = model.Level,
                 Geha = model.Geha.ToString(),
-                SignaturePath = model.Signature != null ? await _storageService.SaveFileAsync(model.Signature) :string.Empty,
+                SignaturePath = model.Signature != null ? await _storageService.SaveFileAsync(model.Signature) : string.Empty,
             };
 
             var createResult = await createFunc(user);
@@ -138,7 +136,7 @@ namespace Reports.Api.Auth.Services
                 TokenExpiryInMinutes = tokenGenerator.TokenExpiryInMinutes,
                 RefreshToken = refreshToken,
                 IsConfirmed = user.EmailConfirmed,
-                level = user.Level.ToString(),
+                Geha = user.Geha.ToString(),
                 UserId = user.Id,
                 Roles = roles,
             };
@@ -196,7 +194,7 @@ namespace Reports.Api.Auth.Services
             return addResult;
         }
 
-   
+
 
         public async Task SaveRefreshTokenAsync(User user, string refreshToken)
         {

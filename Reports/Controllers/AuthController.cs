@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Auth.Models;
 using Reports.Api.Auth.Services;
 using Reports.Api.Domain.Constants;
-using Reports.Api.Domain.Entities;
 using Reports.Api.Features.Auth.Commands.RefreshToken;
 using Reports.Api.Features.Auth.Commands.Register;
 using Reports.Application.Auth.Models;
@@ -103,19 +102,6 @@ namespace Reports.Api.Controllers
             return Ok(res);
         }
 
-        [HttpGet("Geha-list")]
-        public ActionResult<ICollection<string>> GetGehaStatus()
-        {
-            var statuses = Enum.GetNames<Geha>();
-            return Ok(statuses);
-        }
-
-        [HttpGet("Level-list")]
-        public ActionResult<ICollection<string>> GetLevelStatus()
-        {
-            var statuses = Enum.GetNames<Level>();
-            return Ok(statuses);
-        }
 
 
 

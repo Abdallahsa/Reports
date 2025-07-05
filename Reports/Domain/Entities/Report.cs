@@ -1,4 +1,5 @@
-﻿using Reports.Domain.Primitives;
+﻿using Reports.Api.Domain.Entities;
+using Reports.Domain.Primitives;
 
 namespace Reports.Domain.Entities
 {
@@ -10,6 +11,9 @@ namespace Reports.Domain.Entities
         public ReportType ReportType { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsApprovedByRA { get; set; }
+        public bool IsRejected { get; set; } = false; // نعرف هل التقرير اترفض في أي مرحلة
+        public Level CurrentApprovalLevel { get; set; } // المستوى الحالي اللي بيوافق
+
         public string FilePath { get; set; } = string.Empty;
         public FileStatus Status { get; set; } = FileStatus.Locked;
 

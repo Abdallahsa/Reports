@@ -2,8 +2,9 @@
 {
     public class GetReportApprovalModel
     {
-        public string Role { get; set; } = string.Empty; // "NRA", "LM", "RO", "RA"
-        public bool IsApproved { get; set; } = false;
+        public int Id { get; set; }
+        public string Geha { get; set; } = string.Empty; // "NRA", "LM", "RO", "RA"
+        public string ApprovalStatus { get; set; } = string.Empty; // "Pending", "Approved", "Rejected", "Cancelled"
         public DateTime? ApprovalDate { get; set; }
     }
 

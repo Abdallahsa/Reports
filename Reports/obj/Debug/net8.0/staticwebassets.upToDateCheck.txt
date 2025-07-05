@@ -1,9 +1,17 @@
 wwwroot\StaticFiles\Docs\2025-06-30-AZ-DailyDeputyReport.docx
 wwwroot\StaticFiles\Docs\2025-07-01-AZ-DailyDeputyReport.docx
+wwwroot\StaticFiles\Docs\2025-07-02-AZ-DailyDeputyReport.docx
+wwwroot\StaticFiles\Docs\2025-07-03-AZ-DailyDeputyReport.docx
+wwwroot\StaticFiles\Docs\2025-07-03-AZ-DailyOperationsReport.docx
+wwwroot\StaticFiles\Docs\2025-07-04-AZ-DailyDeputyReport.docx
+wwwroot\StaticFiles\Docs\2025-07-04-AZ-DailyOperationsReport.docx
 wwwroot\StaticFiles\Images\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png
 wwwroot\StaticFiles\Images\4387cc28-7684-4bef-9da3-6c2ec33defd1_Annotation 2025-06-30 093202.png
 wwwroot\StaticFiles\Images\7e14305b-ba88-40dc-a7f4-f7d1a000ec3c_Annotation 2025-06-30 093202.png
 wwwroot\StaticFiles\Images\7fe7e6ed-c1c0-4dd2-a557-9e8650663ed2_Annotation 2025-06-30 093202.png
 wwwroot\StaticFiles\Images\9040c48e-1fe0-4a0b-be72-3d6d4193a45f_cute-word-thank-you-cartoon-style-illustration-vector.jpg
+wwwroot\StaticFiles\Templets\AirDefenseEmergencyDeputyReport.docx
+wwwroot\StaticFiles\Templets\BrigadeDeputyReport.docx
+wwwroot\StaticFiles\Templets\ChiefOfStaffDeputyReport.docx
 wwwroot\StaticFiles\Templets\DailyDeputyReport.docx
-wwwroot\StaticFiles\Docs\2025-07-02-AZ-DailyDeputyReport.docx
+wwwroot\StaticFiles\Templets\DailyOperationsReport.docx

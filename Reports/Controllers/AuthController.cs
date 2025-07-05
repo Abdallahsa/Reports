@@ -5,6 +5,7 @@ using Reports.Api.Auth.Services;
 using Reports.Api.Domain.Constants;
 using Reports.Api.Features.Auth.Commands.RefreshToken;
 using Reports.Api.Features.Auth.Commands.Register;
+using Reports.Api.Features.Common.Models;
 using Reports.Application.Auth.Models;
 using Reports.Features.Admin.Commands.AddUser;
 using Reports.Features.Auth.Commands.UpLoadSignature;
@@ -63,7 +64,7 @@ namespace Reports.Api.Controllers
 
         [Authorize]
         [HttpGet("get-roles")]
-        public async Task<IActionResult> GetRoles()
+        public async Task<ActionResult<ICollection<string>>> GetRoles()
         {
             return Ok(await authService.GetRolesAsync());
         }
@@ -71,7 +72,7 @@ namespace Reports.Api.Controllers
         // method tro add customer
         [HttpPost("add-user")]
         [Authorize(Roles = RoleConstants.Admin)]
-        public async Task<IActionResult> AddCustomer([FromForm] AddUserCommand command)
+        public async Task<ActionResult<ICollection<string>>> AddCustomer([FromForm] AddUserCommand command)
         {
             return Ok(await _mediator.Send(command));
 
@@ -95,11 +96,10 @@ namespace Reports.Api.Controllers
 
         [Authorize]
         [HttpGet("my-profile")]
-        public async Task<ActionResult<GetMyProfileQuery>> GetMyProfile()
+        public async Task<ActionResult<UserDto>> GetMyProfile()
         {
-            var query = new GetMyProfileQuery();
-            var res = await _mediator.Send(query);
-            return Ok(res);
+
+            return Ok(await _mediator.Send(new GetMyProfileQuery()));
         }
 
 

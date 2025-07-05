@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
 using Reports.Features.Notifications.Commands.SendNotificationToAll;
+using Reports.Features.Notifications.Models;
 using Reports.Features.Notifications.Queries.GetMyNotifications;
 using Reports.Features.Notifications.Queries.GetNotificationById;
 
@@ -21,19 +23,17 @@ namespace Reports.Controllers
 
         [HttpPost("my")]
         [Authorize]
-        public async Task<IActionResult> GetMyNotifications(GetMyNotificationsQuery query)
+        public async Task<ActionResult<PagedList<GetMyNotificationsModel>>> GetMyNotifications(GetMyNotificationsQuery query)
         {
-            var notifications = await _mediator.Send(query);
-            return Ok(notifications);
+            return Ok(await _mediator.Send(query));
         }
 
         // endpoint return notification by id
         [HttpGet("notification/{id}")]
         [Authorize]
-        public async Task<IActionResult> GetNotificationById(int id)
+        public async Task<ActionResult<GetNotificationByIdModel>> GetNotificationById(int id)
         {
-            var result = await _mediator.Send(new GetNotificationByIdQuery { Id = id });
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetNotificationByIdQuery { Id = id }));
         }
 
 

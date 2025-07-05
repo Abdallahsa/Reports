@@ -10,6 +10,116 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Reports.Controllers.ApprovalController",
+    "Method": "GetReportApprovalHistory",
+    "RelativePath": "api/Approval/{reportId}/approval-history",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Features.Approval.Models.ReportApprovalHistoryModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ApprovalController",
+    "Method": "ApproveReport",
+    "RelativePath": "api/Approval/approve-report/{reportId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ApprovalController",
+    "Method": "GetMyApprovedReports",
+    "RelativePath": "api/Approval/my-approved-reports",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Reports.Features.Reportss.Queries.GetMyApprovedReports.GetMyApprovedReportsQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Api.Common.Abstractions.Collections.PagedList\u00601[[Reports.Features.Reportss.Model.GetAllReportModel, Reports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ApprovalController",
+    "Method": "RejectReport",
+    "RelativePath": "api/Approval/reject-report/{reportId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reportId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Reports.Controllers.ApprovalController",
+    "Method": "GetTodayPendingApprovalReports",
+    "RelativePath": "api/Approval/today-pending",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Reports.Features.Approval.Queries.GetTodayPendingApprovalReports.GetTodayPendingApprovalReportsQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Api.Common.Abstractions.Collections.PagedList\u00601[[Reports.Features.Reportss.Model.GetAllReportModel, Reports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Reports.Api.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "api/Auth/add-admin",
@@ -119,7 +229,17 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Reports.Api.Controllers.AuthController",
@@ -139,38 +259,8 @@
   },
   {
     "ContainingType": "Reports.Api.Controllers.AuthController",
-    "Method": "GetGehaStatus",
-    "RelativePath": "api/Auth/Geha-list",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Reports.Api.Controllers.AuthController",
     "Method": "GetRoles",
     "RelativePath": "api/Auth/get-roles",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Reports.Api.Controllers.AuthController",
-    "Method": "GetLevelStatus",
-    "RelativePath": "api/Auth/Level-list",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -223,7 +313,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "Reports.Features.Auth.Queries.GetMyProfile.GetMyProfileQuery",
+        "Type": "Reports.Api.Features.Common.Models.UserDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -276,24 +366,304 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Reports.Controllers.ReportsController",
-    "Method": "GetAllReports",
-    "RelativePath": "api/Reports/all-reports",
+    "ContainingType": "Reports.Controllers.ForgotPasswordRequestController",
+    "Method": "GetById",
+    "RelativePath": "api/ForgotPasswordRequest/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Features.ForgotPasswordRequests.Models.ForgotPasswordRequestModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ForgotPasswordRequestController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/ForgotPasswordRequest/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Reports.Features.ForgotPasswordRequests.Commands.ChangePassword.ChangePasswordCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ForgotPasswordRequestController",
+    "Method": "GetAllForgotPasswordRequests",
+    "RelativePath": "api/ForgotPasswordRequest/get-all-forgot-password-requests",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Reports.Features.ForgotPasswordRequests.Queries.GetAllForgotPasswordRequest.GetAllForgotPasswordRequestQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Api.Common.Abstractions.Collections.PagedList\u00601[[Reports.Features.ForgotPasswordRequests.Models.ForgotPasswordRequestModel, Reports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ForgotPasswordRequestController",
+    "Method": "RequestForgotPassword",
+    "RelativePath": "api/ForgotPasswordRequest/request-forgot-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordRequests.CreateForgotPasswordRequestCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.NotificationController",
+    "Method": "GetMyNotifications",
+    "RelativePath": "api/Notification/my",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Reports.Features.Notifications.Queries.GetMyNotifications.GetMyNotificationsQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Api.Common.Abstractions.Collections.PagedList\u00601[[Reports.Features.Notifications.Models.GetMyNotificationsModel, Reports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.NotificationController",
+    "Method": "GetNotificationById",
+    "RelativePath": "api/Notification/notification/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Features.Notifications.Models.GetNotificationByIdModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.NotificationController",
+    "Method": "SendNotificationToAll",
+    "RelativePath": "api/Notification/send-to-all",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Type",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "Reports.Controllers.ReportsController",
-    "Method": "CreateDailyDeputyReport",
-    "RelativePath": "api/Reports/create-daily-deputy-report",
+    "Method": "GetReportById",
+    "RelativePath": "api/Reports/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Features.Reportss.Model.GetReportByIdModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "GetAllReports",
+    "RelativePath": "api/Reports/all-reports",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Reports.Features.Reportss.Queries.GetAllReport.GetAllReportQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Reports.Api.Common.Abstractions.Collections.PagedList\u00601[[Reports.Features.Reportss.Model.GetAllReportModel, Reports, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "CreateReport",
+    "RelativePath": "api/Reports/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ReportType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "GetGehaStatus",
+    "RelativePath": "api/Reports/Geha-list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Reports.Controllers.ReportsController",
+    "Method": "GetLevelStatus",
+    "RelativePath": "api/Reports/Level-list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Reports.Controllers.ReportsController",
@@ -309,7 +679,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Reports.Controllers.ReportsController",
@@ -319,7 +699,17 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Reports.Controllers.ReportsController",
@@ -335,6 +725,16 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

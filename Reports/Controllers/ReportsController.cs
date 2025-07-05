@@ -22,7 +22,7 @@ namespace Reports.Controllers
 
         [HttpPost("create")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> CreateReport([FromForm] CreateReportCommand command)
+        public async Task<ActionResult<string>> CreateReport([FromForm] CreateReportCommand command)
         {
             return Ok(await _mediator.Send(command));
         }
@@ -31,20 +31,18 @@ namespace Reports.Controllers
 
         [HttpPost("unlock-report/{reportId}")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> UnlockReport(int reportId)
+        public async Task<ActionResult<string>> UnlockReport(int reportId)
         {
-            var result = await _mediator.Send(new UnlockReportCommand { ReportId = reportId });
-            return Ok(result);
+            return Ok(await _mediator.Send(new UnlockReportCommand { ReportId = reportId }));
         }
 
 
 
         [HttpPost("lock-report/{reportId}")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> LockReport(int reportId)
+        public async Task<ActionResult<string>> LockReport(int reportId)
         {
-            var result = await _mediator.Send(new LockReportCommand { ReportId = reportId });
-            return Ok(result);
+            return Ok(await _mediator.Send(new LockReportCommand { ReportId = reportId }));
         }
 
 
@@ -63,20 +61,18 @@ namespace Reports.Controllers
 
         [HttpGet("{id}")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> GetReportById(int id)
+        public async Task<ActionResult<GetReportByIdModel>> GetReportById(int id)
         {
-            var result = await _mediator.Send(new GetReportByIdQuery { Id = id });
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetReportByIdQuery { Id = id }));
         }
 
 
 
         [Authorize]
         [HttpGet("my-available-reports")]
-        public async Task<IActionResult> GetMyAvailableReports()
+        public async Task<ActionResult<List<string>>> GetMyAvailableReports()
         {
-            var result = await _mediator.Send(new GetAvailableReportTypesQuery());
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetAvailableReportTypesQuery()));
         }
 
         [HttpGet("Geha-list")]

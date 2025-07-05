@@ -5,6 +5,7 @@ using Reports.Api.Controllers;
 using Reports.Api.Domain.Constants;
 using Reports.Features.Approval.Commands.ApproveReport;
 using Reports.Features.Approval.Commands.RejectReport;
+using Reports.Features.Approval.Models;
 using Reports.Features.Approval.Queries.GetReportApprovalHistory;
 using Reports.Features.Approval.Queries.GetTodayPendingApprovalReports;
 using Reports.Features.Reportss.Model;
@@ -35,7 +36,7 @@ namespace Reports.Controllers
 
         [HttpPost("today-pending")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> GetTodayPendingApprovalReports(GetTodayPendingApprovalReportsQuery query)
+        public async Task<ActionResult<PagedList<GetAllReportModel>>> GetTodayPendingApprovalReports(GetTodayPendingApprovalReportsQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
@@ -45,20 +46,19 @@ namespace Reports.Controllers
         // endpoint to return all reports i marked approved
         [HttpPost("my-approved-reports")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<PagedList<GetAllReportModel>> GetMyApprovedReports(GetMyApprovedReportsQuery query)
+        public async Task<ActionResult<PagedList<GetAllReportModel>>> GetMyApprovedReports(GetMyApprovedReportsQuery query)
         {
-            return await _mediator.Send(query);
+            return Ok(await _mediator.Send(query));
 
         }
 
         // endpoint to return all history of reports i approved
         [HttpPost("{reportId}/approval-history")]
         [Authorize(Roles = $"{RoleConstants.LevelZero},{RoleConstants.LevelOne},{RoleConstants.LevelTwo},{RoleConstants.LevelThree},{RoleConstants.LevelFour}")]
-        public async Task<IActionResult> GetReportApprovalHistory(int reportId)
+        public async Task<ActionResult<ReportApprovalHistoryModel>> GetReportApprovalHistory(int reportId)
         {
-            var query = new GetReportApprovalHistoryQuery { ReportId = reportId };
-            var result = await _mediator.Send(query);
-            return Ok(result);
+
+            return Ok(await _mediator.Send(new GetReportApprovalHistoryQuery { ReportId = reportId }));
         }
 
     }

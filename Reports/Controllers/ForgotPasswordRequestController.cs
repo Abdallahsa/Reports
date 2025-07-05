@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
 using Reports.Api.Domain.Constants;
 using Reports.Features.ForgotPasswordRequests.Commands.ChangePassword;
 using Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordRequests;
+using Reports.Features.ForgotPasswordRequests.Models;
 using Reports.Features.ForgotPasswordRequests.Queries.GetAllForgotPasswordRequest;
 using Reports.Features.ForgotPasswordRequests.Queries.GetForgotPasswordRequestById;
 
@@ -16,36 +19,32 @@ namespace Reports.Controllers
     {
 
         [HttpPost("request-forgot-password")]
-        public async Task<IActionResult> RequestForgotPassword([FromBody] CreateForgotPasswordRequestCommand command)
+        public async Task<ActionResult<string>> RequestForgotPassword([FromBody] CreateForgotPasswordRequestCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(new { success = result });
+            return Ok(await _mediator.Send(command));
         }
 
 
         [HttpPost("get-all-forgot-password-requests")]
         [Authorize(Roles = RoleConstants.Admin)]
-        public async Task<IActionResult> GetAllForgotPasswordRequests([FromBody] GetAllForgotPasswordRequestQuery query)
+        public async Task<ActionResult<PagedList<ForgotPasswordRequestModel>>> GetAllForgotPasswordRequests([FromBody] GetAllForgotPasswordRequestQuery query)
         {
-            var result = await _mediator.Send(query);
-            return Ok(result);
+            return Ok(await _mediator.Send(query));
         }
 
         [HttpGet("{id}")]
         [Authorize(Roles = RoleConstants.Admin)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<ForgotPasswordRequestModel>> GetById(int id)
         {
-            var result = await _mediator.Send(new GetForgotPasswordRequestByIdQuery { Id = id });
-            return Ok(result);
+            return Ok(await _mediator.Send(new GetForgotPasswordRequestByIdQuery { Id = id }));
         }
 
         // Endpoint to change the password
         [HttpPost("change-password")]
         [Authorize(Roles = RoleConstants.Admin)]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
+        public async Task<ActionResult<string>> ChangePassword([FromBody] ChangePasswordCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(new { success = result });
+            return Ok(await _mediator.Send(command));
         }
 
 

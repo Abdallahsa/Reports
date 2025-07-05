@@ -3,60 +3,12 @@
   "WorkspaceRootPath": "E:\\Reports\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\data\\configurations\\forgotpasswordrequestconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\data\\configurations\\forgotpasswordrequestconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\data\\configurations\\reportapprovalconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\data\\configurations\\reportapprovalconfigurations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\forgotpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\forgotpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\reportss\\queries\\getavailablereporttypes\\getavailablereporttypesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\reportss\\queries\\getavailablereporttypes\\getavailablereporttypesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\exceptions\\reporttypeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\exceptions\\reporttypeextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\extensions\\iqueryableextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\extensions\\iqueryableextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\exceptions\\gehaextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\exceptions\\gehaextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\common\\exceptions\\serviceunavailableexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\common\\exceptions\\serviceunavailableexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\admin\\commands\\createforgotpasswordrequest\\createforgotpasswordrequestcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\features\\admin\\commands\\createforgotpasswordrequest\\createforgotpasswordrequestcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\service\\currentuser\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\service\\currentuser\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\service\\currentuser\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|solutionrelative:reports\\service\\currentuser\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9F8CA89-B78F-4E45-8D30-E864E331438C}|Reports\\Reports.csproj|e:\\reports\\reports\\features\\reportss\\queries\\getallreport\\getallreportquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -70,11 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 1,
               "Title": "ReportsController.cs",
               "DocumentMoniker": "E:\\Reports\\Reports\\Controllers\\ReportsController.cs",
               "RelativeDocumentMoniker": "Reports\\Controllers\\ReportsController.cs",
@@ -83,12 +35,11 @@
               "ViewState": "AgIAACwAAAAAAAAAAAAwwDkAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T12:56:32.317Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 2,
               "Title": "GetAllReportQuery.cs",
               "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
               "RelativeDocumentMoniker": "Reports\\Features\\Reportss\\Queries\\GetAllReport\\GetAllReportQuery.cs",
@@ -97,176 +48,19 @@
               "ViewState": "AgIAAAoAAAAAAAAAAAAAACwAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-01T11:56:28.5Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReportApprovalConfigurations.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Data\\Configurations\\ReportApprovalConfigurations.cs",
-              "RelativeDocumentMoniker": "Reports\\Data\\Configurations\\ReportApprovalConfigurations.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Data\\Configurations\\ReportApprovalConfigurations.cs",
-              "RelativeToolTip": "Reports\\Data\\Configurations\\ReportApprovalConfigurations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:59:22.391Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ForgotPasswordRequestConfigurations.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Data\\Configurations\\ForgotPasswordRequestConfigurations.cs",
-              "RelativeDocumentMoniker": "Reports\\Data\\Configurations\\ForgotPasswordRequestConfigurations.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Data\\Configurations\\ForgotPasswordRequestConfigurations.cs*",
-              "RelativeToolTip": "Reports\\Data\\Configurations\\ForgotPasswordRequestConfigurations.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Title": "CreateForgotPasswordRequestCommand.cs",
+              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
+              "RelativeDocumentMoniker": "Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
+              "ToolTip": "E:\\Reports\\Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
+              "RelativeToolTip": "Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAkwCoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:59:14.293Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ForgotPasswordRequest.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\ForgotPasswordRequest.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\ForgotPasswordRequest.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\ForgotPasswordRequest.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\ForgotPasswordRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:57:57.305Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Reports\\Controllers\\AuthController.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Controllers\\AuthController.cs*",
-              "RelativeToolTip": "Reports\\Controllers\\AuthController.cs*",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAuwHcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:57:20.837Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\User.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\User.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAUwCAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:53:27.707Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ReportTypeExtensions.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Exceptions\\ReportTypeExtensions.cs",
-              "RelativeDocumentMoniker": "Reports\\Common\\Exceptions\\ReportTypeExtensions.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Common\\Exceptions\\ReportTypeExtensions.cs",
-              "RelativeToolTip": "Reports\\Common\\Exceptions\\ReportTypeExtensions.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAUwAsAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:50:47.071Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IQueryableExtension.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Extensions\\IQueryableExtension.cs",
-              "RelativeDocumentMoniker": "Reports\\Extensions\\IQueryableExtension.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Extensions\\IQueryableExtension.cs",
-              "RelativeToolTip": "Reports\\Extensions\\IQueryableExtension.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:48:09.392Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GetAvailableReportTypesQuery.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Features\\Reportss\\Queries\\GetAvailableReportTypes\\GetAvailableReportTypesQuery.cs",
-              "RelativeDocumentMoniker": "Reports\\Features\\Reportss\\Queries\\GetAvailableReportTypes\\GetAvailableReportTypesQuery.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Features\\Reportss\\Queries\\GetAvailableReportTypes\\GetAvailableReportTypesQuery.cs",
-              "RelativeToolTip": "Reports\\Features\\Reportss\\Queries\\GetAvailableReportTypes\\GetAvailableReportTypesQuery.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAgwBYAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:40:48.097Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GehaExtensions.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Exceptions\\GehaExtensions.cs",
-              "RelativeDocumentMoniker": "Reports\\Common\\Exceptions\\GehaExtensions.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Common\\Exceptions\\GehaExtensions.cs",
-              "RelativeToolTip": "Reports\\Common\\Exceptions\\GehaExtensions.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwBsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:47:15.187Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ServiceUnavailableException.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Common\\Exceptions\\ServiceUnavailableException.cs",
-              "RelativeDocumentMoniker": "Reports\\Common\\Exceptions\\ServiceUnavailableException.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Common\\Exceptions\\ServiceUnavailableException.cs",
-              "RelativeToolTip": "Reports\\Common\\Exceptions\\ServiceUnavailableException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T11:47:12.096Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Report.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
-              "RelativeDocumentMoniker": "Reports\\Domain\\Entities\\Report.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Domain\\Entities\\Report.cs",
-              "RelativeToolTip": "Reports\\Domain\\Entities\\Report.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAUwBwAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:37:50.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CurrentUserService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Service\\CurrentUser\\CurrentUserService.cs",
-              "RelativeDocumentMoniker": "Reports\\Service\\CurrentUser\\CurrentUserService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Service\\CurrentUser\\CurrentUserService.cs",
-              "RelativeToolTip": "Reports\\Service\\CurrentUser\\CurrentUserService.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:37:12.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ICurrentUserService.cs",
-              "DocumentMoniker": "E:\\Reports\\Reports\\Service\\CurrentUser\\ICurrentUserService.cs",
-              "RelativeDocumentMoniker": "Reports\\Service\\CurrentUser\\ICurrentUserService.cs",
-              "ToolTip": "E:\\Reports\\Reports\\Service\\CurrentUser\\ICurrentUserService.cs",
-              "RelativeToolTip": "Reports\\Service\\CurrentUser\\ICurrentUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:37:07.282Z",
+              "WhenOpened": "2025-07-02T12:02:12.475Z",
               "EditorCaption": ""
             }
           ]

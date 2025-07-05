@@ -35,8 +35,7 @@
               "ViewState": "AgIAACwAAAAAAAAAAAAwwDkAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T12:56:32.317Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -49,8 +48,7 @@
               "ViewState": "AgIAAAoAAAAAAAAAAAAAACwAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-01T11:56:28.5Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -60,7 +58,7 @@
               "RelativeDocumentMoniker": "Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
               "ToolTip": "E:\\Reports\\Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
               "RelativeToolTip": "Reports\\Features\\Admin\\Commands\\CreateForgotPasswordRequest\\CreateForgotPasswordRequestCommand.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAiwCoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAIA6wBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T12:02:12.475Z",
               "EditorCaption": ""

@@ -24,7 +24,7 @@ namespace Reports.Features.Notifications.Queries.GetNotificationById
             {
                 var userId = _currentUserService.UserId;
 
-                var notification = await _context.Notifications
+                var notification = await _context.Notification
                     .Include(n => n.Sender)
                     .Where(n => n.Id == request.Id && n.ReceiverId == userId)
                     .Select(n => new GetNotificationByIdModel
@@ -43,11 +43,11 @@ namespace Reports.Features.Notifications.Queries.GetNotificationById
                 // Mark notification as read
                 if (!notification.IsRead)
                 {
-                    var dbNotification = await _context.Notifications.FindAsync(request.Id);
+                    var dbNotification = await _context.Notification.FindAsync(request.Id);
                     if (dbNotification != null)
                     {
                         dbNotification.IsRead = true;
-                        _context.Notifications.Update(dbNotification);
+                        _context.Notification.Update(dbNotification);
                         await _context.SaveChangesAsync(cancellationToken);
                     }
                 }
@@ -75,7 +75,7 @@ namespace Reports.Features.Notifications.Queries.GetNotificationById
             RuleFor(x => x.Id)
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    return await _context.Notifications.AnyAsync(n => n.Id == id, cancellationToken);
+                    return await _context.Notification.AnyAsync(n => n.Id == id, cancellationToken);
                 })
                 .WithMessage("Notification with this ID does not exist.");
 
@@ -83,7 +83,7 @@ namespace Reports.Features.Notifications.Queries.GetNotificationById
             RuleFor(x => x.Id)
                 .MustAsync(async (request, id, cancellationToken) =>
                 {
-                    return await _context.Notifications.AnyAsync(n => n.Id == id && n.ReceiverId == _currentUserService.UserId, cancellationToken);
+                    return await _context.Notification.AnyAsync(n => n.Id == id && n.ReceiverId == _currentUserService.UserId, cancellationToken);
                 })
                 .WithMessage("You do not have permission to access this notification.");
         }

@@ -34,7 +34,7 @@ namespace Reports.Features.Notifications.Queries.GetMyNotifications
                 request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
 
 
-                var queryAll = _context.Notifications
+                var queryAll = _context.Set<Notification>()
                     .Where(n => n.ReceiverId == userId)
                     .AsQueryable();
 

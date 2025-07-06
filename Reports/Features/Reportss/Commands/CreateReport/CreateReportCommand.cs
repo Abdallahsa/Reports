@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Reports.Api.Data;
 using Reports.Api.Domain.Entities;
 using Reports.Api.Services.CurrentUser;
+using Reports.Api.Services.Notifications;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
+using Reports.Service.GehaService;
 using Reports.Service.ReportService;
 using Reports.Service.SaveReport;
 
@@ -19,6 +21,8 @@ namespace Reports.Features.Reportss.Commands.CreateReport
     public class CreateReportCommandHandler(
         ICurrentUserService _currentUserService,
         AppDbContext _context,
+        IUserGehaService _userGehaService,
+        INotificationService _notificationService,
         ITemplateReportService _templateReportService
     ) : ICommandHandler<CreateReportCommand, string>
     {
@@ -61,6 +65,28 @@ namespace Reports.Features.Reportss.Commands.CreateReport
                     IsRejected = false,
 
                 };
+                var requiredGehas = _userGehaService.GetAllowedGehaByLevel(report.CurrentApprovalLevel)
+                    .Select(g => g.ToString())
+                    .ToList();
+
+                var targetUsers = await _context.Users
+                    .Where(u => u.Level == report.CurrentApprovalLevel && requiredGehas.Contains(u.Geha))
+                    .ToListAsync(cancellationToken);
+
+                var title = "تقرير جديد بحاجة لموافقتك";
+                var content = $"تقرير رقم {report.Id} تم إنشاؤه اليوم وهو بحاجة إلى موافقتك في المستوى {report.CurrentApprovalLevel}.";
+
+                foreach (var targetUser in targetUsers)
+                {
+                    await _notificationService.SendNotificationAsync(
+                        title,
+                        content,
+                        targetUser.Id,
+                        NotificationType.Info,
+                        senderId: _currentUserService.UserId,
+                        cancellationToken
+                    );
+                }
 
                 await _context.Reports.AddAsync(report, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);

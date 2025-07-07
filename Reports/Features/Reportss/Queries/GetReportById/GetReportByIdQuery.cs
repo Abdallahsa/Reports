@@ -7,6 +7,7 @@ using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
 using Reports.Features.Reportss.Model;
+using Serilog;
 
 namespace Reports.Features.Reportss.Queries.GetReportById
 {
@@ -28,7 +29,6 @@ namespace Reports.Features.Reportss.Queries.GetReportById
         {
             try
             {
-                // جيب المستخدم الحالي
                 var user = await _context.Users
                     .FirstOrDefaultAsync(u => u.Id == _currentUserService.UserId, cancellationToken)
                     ?? throw new NotFoundException(nameof(User), _currentUserService.UserId);
@@ -65,12 +65,20 @@ namespace Reports.Features.Reportss.Queries.GetReportById
                     .FirstOrDefaultAsync(cancellationToken)
                     ?? throw new NotFoundException("Report not found");
 
+                // log
+
+                Log.Information("User {UserId} fetched report {ReportId} successfully", _currentUserService.UserId, request.Id);
+
+
+
                 return report;
             }
             catch (Exception ex)
             {
-                throw new NotFoundException("Report not found", ex);
+                Log.Error(ex, "Error fetching report by Id {ReportId} for user {UserId}", request.Id, _currentUserService.UserId);
+                throw new BadRequestException(ex.Message);
             }
+
 
 
         }

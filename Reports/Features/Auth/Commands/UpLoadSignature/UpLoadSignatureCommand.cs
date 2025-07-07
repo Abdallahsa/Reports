@@ -5,25 +5,26 @@ using Reports.Api.Services;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
+using Serilog;
 
 namespace Reports.Features.Auth.Commands.UpLoadSignature
 {
-    public class UpLoadSignatureCommand :ICommand
+    public class UpLoadSignatureCommand : ICommand
     {
 
-        public required  IFormFile Signature { get; set; }
+        public required IFormFile Signature { get; set; }
 
     }
 
     // Create Handler for UpLoadSignatureCommand
 
     public class UpLoadSignatureCommandHandler(ICurrentUserService currentUserService,
-        AppDbContext context ,
+        AppDbContext context,
         IStorageService storageService
         ) : ICommandHandler<UpLoadSignatureCommand>
     {
         public async Task Handle(UpLoadSignatureCommand request, CancellationToken cancellationToken)
-        {  
+        {
             //using make transactional start
             using var transaction = context.Database.BeginTransaction();
             try
@@ -38,11 +39,19 @@ namespace Reports.Features.Auth.Commands.UpLoadSignature
 
                 await context.SaveChangesAsync();
 
-               await transaction.CommitAsync();
+                await transaction.CommitAsync();
+
+                // log
+
+
+                Log.Information("Signature uploaded successfully for user {UserId}", currentUserService.UserId);
+
             }
             catch (Exception ex)
             {
-               await transaction.RollbackAsync();
+                await transaction.RollbackAsync();
+                Log.Error(ex, "Error occurred while uploading signature for user {UserId}", currentUserService.UserId);
+
                 throw new BadRequestException(ex.Message);
             }
 

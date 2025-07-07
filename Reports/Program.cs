@@ -1,32 +1,34 @@
 using Manzoma.Api.Data.Seeders;
 using Microsoft.OpenApi.Models;
 using Reports.Api.Configurations;
+using Reports.Api.Middleware;
+using Serilog;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configure Serilog (modern style)
+builder.Host.UseSerilog((context, services, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration)
+                 .Enrich.FromLogContext();
+});
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-// Add services to the container.
+// Add services
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-
     });
 
-
+// Swagger with JWT config
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    // Other Swagger configurations
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
@@ -36,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer"
     });
 
-    var securityRequirement = new OpenApiSecurityRequirement
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -49,31 +51,35 @@ builder.Services.AddSwaggerGen(c =>
             },
             Array.Empty<string>()
         }
-    };
-
-    c.AddSecurityRequirement(securityRequirement);
+    });
 });
 
-// Add extensions services from other projects
+// Register application & infrastructure services
 builder.Services.AddAllExtensions(builder.Configuration);
 
-builder.Services.AddSwaggerGen();
+// say welcome in log 
+Log.Information("Starting Reports API...");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Global exception handling middleware (should come first)
+app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+// Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMiddleware<Reports.Api.Middleware.ExceptionHandlerMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-await app.SeedData(); 
+// Seed data if needed
+await app.SeedData();
 
+// Start app
 app.Run();

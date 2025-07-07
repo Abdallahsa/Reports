@@ -5,6 +5,7 @@ using Reports.Api.Domain.Entities;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
+using Serilog;
 
 namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordRequests
 {
@@ -15,18 +16,18 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordR
 
     }
 
+
     public class CreateForgotPasswordRequestCommandHandler(
-       AppDbContext _context
-       ) : ICommandHandler<CreateForgotPasswordRequestCommand, string>
+        AppDbContext _context
+        ) : ICommandHandler<CreateForgotPasswordRequestCommand, string>
     {
         public async Task<string> Handle(CreateForgotPasswordRequestCommand request, CancellationToken cancellationToken)
         {
-
             try
             {
-
                 var userExists = await _context.Users
                     .AnyAsync(u => u.Email == request.Email, cancellationToken);
+
                 if (!userExists)
                     throw new NotFoundException(nameof(User), request.Email);
 
@@ -41,16 +42,17 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordR
                 await _context.Set<ForgotPasswordRequest>().AddAsync(forgotRequest, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return "Forgot password request created successfully.";
+                Log.Information("Forgot password request created for email: {Email} at {Time}", request.Email, DateTime.UtcNow);
 
+                return "Forgot password request created successfully.";
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Error creating forgot password request for email: {Email}", request.Email);
                 throw new BadRequestException(ex.Message);
             }
         }
     }
-
     public class CreateForgotPasswordRequestCommandValidator : AbstractValidator<CreateForgotPasswordRequestCommand>
     {
         public CreateForgotPasswordRequestCommandValidator(AppDbContext context)
@@ -67,5 +69,9 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordR
                 .WithMessage("Email does not exist in the system");
         }
     }
-
 }
+
+
+
+
+

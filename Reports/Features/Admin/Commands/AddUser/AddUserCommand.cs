@@ -6,7 +6,7 @@ using Reports.Api.Data;
 using Reports.Api.Features.Auth.Models;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
-using Reports.Api.Services;
+using Serilog;
 
 namespace Reports.Features.Admin.Commands.AddUser
 {
@@ -14,7 +14,7 @@ namespace Reports.Features.Admin.Commands.AddUser
     {
     }
 
-    public  class AddUserCommandHandler : ICommandHandler<AddUserCommand, int>
+    public class AddUserCommandHandler : ICommandHandler<AddUserCommand, int>
     {
         private readonly IAuthService authService;
         private readonly ICurrentUserService currentUserService;
@@ -36,10 +36,14 @@ namespace Reports.Features.Admin.Commands.AddUser
                     Email = request.Email,
                     Password = request.Password,
                     Level = request.Level,
-                    Geha= request.Geha,
+                    Geha = request.Geha,
                     Signature = request.Signature
 
                 }, currentUserService.UserId);
+
+                // log
+                Log.Information("User registered successfully with id {UserId} by admin {AdminId}", createResult, currentUserService.UserId);
+
 
                 return createResult;
             }
@@ -47,6 +51,8 @@ namespace Reports.Features.Admin.Commands.AddUser
 
             catch (Exception ex)
             {
+                Log.Error(ex, "Error while registering user with email {Email}", request.Email);
+
                 throw new Exception($"Failed to register User: {ex.Message}", ex);
 
             }
@@ -55,7 +61,7 @@ namespace Reports.Features.Admin.Commands.AddUser
 
     public class AddUserCommandValidator : AbstractValidator<AddUserCommand>
     {
-       public  AddUserCommandValidator(AppDbContext context)
+        public AddUserCommandValidator(AppDbContext context)
         {
             RuleFor(x => x.FirstName)
                  .NotEmpty().WithMessage("First name is required.")
@@ -72,6 +78,13 @@ namespace Reports.Features.Admin.Commands.AddUser
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Password is required.")
                 .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
+
+            RuleFor(x => x.Geha)
+                .NotEmpty().WithMessage("Geha is required.");
+
+            RuleFor(x => x.Level)
+                .IsInEnum().WithMessage("Invalid level.");
+
         }
 
     }

@@ -5,6 +5,7 @@ using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Features.Approval.Models;
 using Reports.Features.Reportss.Model;
+using Serilog;
 
 namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
 {
@@ -55,12 +56,17 @@ namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
                     .FirstAsync(cancellationToken)
                     ?? throw new NotFoundException("Report", request.ReportId);
 
+                //log the retrieval of approval history
+                Log.Information("Retrieved approval history for ReportId: {ReportId}", request.ReportId);
+
                 return approvals;
 
 
             }
             catch (Exception ex)
             {
+                // Log the exception (optional)
+                Log.Error(ex, "Error occurred while getting report approval history for ReportId: {ReportId}", request.ReportId);
                 throw new BadRequestException(ex.Message);
             }
 

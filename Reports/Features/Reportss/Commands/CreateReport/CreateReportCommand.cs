@@ -10,6 +10,7 @@ using Reports.Domain.Entities;
 using Reports.Service.GehaService;
 using Reports.Service.ReportService;
 using Reports.Service.SaveReport;
+using Serilog;
 
 namespace Reports.Features.Reportss.Commands.CreateReport
 {
@@ -91,10 +92,17 @@ namespace Reports.Features.Reportss.Commands.CreateReport
                 await _context.Reports.AddAsync(report, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
+                // Log the creation of the report
+                Log.Information("Report of type {ReportType} created for user {UserId} with file {FileName}",
+                                                   request.ReportType, _currentUserService.UserId, newFileName);
+
                 return newFileName;
             }
             catch (Exception ex)
             {
+                // Log the exception (optional)
+                Log.Error(ex, "Error occurred while creating report of type {ReportType} for user {UserId}",
+                                       request.ReportType, _currentUserService.UserId);
                 throw new BadRequestException(ex.Message);
             }
         }

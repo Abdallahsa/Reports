@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Reports.Api.Auth.Models;
 using Reports.Api.Auth.Services;
 using Reports.Api.Data;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
-using Microsoft.EntityFrameworkCore;
-using Reports.Api.Features.Auth.Commands.Register;
+using Serilog;
 
 namespace Reports.Api.Features.Auth.Commands.Register
 {
@@ -29,7 +29,7 @@ namespace Reports.Api.Features.Auth.Commands.Register
                     FirstName = request.FirstName,
                     LastName = request.LastName,
                     Email = request.Email,
-                    
+
                     Password = request.Password,
                     Level = request.Level,
                     Geha = request.Geha,
@@ -39,12 +39,20 @@ namespace Reports.Api.Features.Auth.Commands.Register
 
                 }, currentUserService.UserId);
 
+                // log
+                Log.Information("User registered successfully with id {UserId} by admin {AdminId}", customerId, currentUserService.UserId);
+
+
+
+
                 // Commit the transaction if everything succeeds
                 await transaction.CommitAsync(cancellationToken);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Rollback the transaction in case of an error
+                Log.Error(ex, "Error occurred while registering user by admin {AdminId}", currentUserService.UserId);
+
                 await transaction.RollbackAsync(cancellationToken);
                 throw; // Rethrow the exception for further handling
             }
@@ -73,6 +81,13 @@ namespace Reports.Api.Features.Auth.Commands.Register
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Password is required.")
                 .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
+
+            RuleFor(x => x.Geha)
+                .NotEmpty().WithMessage("Geha is required.");
+
+            RuleFor(x => x.Level)
+                .IsInEnum().WithMessage("Invalid level.");
+
 
         }
     }

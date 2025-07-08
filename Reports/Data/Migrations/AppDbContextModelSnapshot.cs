@@ -150,7 +150,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RefreshTokens", (string)null);
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("Reports.Api.Domain.Entities.Role", b =>
@@ -286,7 +286,7 @@ namespace Reports.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ForgotPasswordRequests", (string)null);
+                    b.ToTable("ForgotPasswordRequests");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Notification", b =>
@@ -329,7 +329,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Notification", (string)null);
+                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Report", b =>
@@ -378,7 +378,7 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("ReportType");
 
-                    b.ToTable("Reports", (string)null);
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.ReportApproval", b =>
@@ -411,7 +411,43 @@ namespace Reports.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Approval", (string)null);
+                    b.ToTable("Approval");
+                });
+
+            modelBuilder.Entity("Reports.Domain.Entities.SystemLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Exception")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageTemplate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Properties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SystemLog");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -479,13 +515,13 @@ namespace Reports.Data.Migrations
             modelBuilder.Entity("Reports.Domain.Entities.Notification", b =>
                 {
                     b.HasOne("Reports.Api.Domain.Entities.User", "Receiver")
-                        .WithMany()
+                        .WithMany("ReceivedNotifications")
                         .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Reports.Api.Domain.Entities.User", "Sender")
-                        .WithMany()
+                        .WithMany("SentNotifications")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -516,6 +552,10 @@ namespace Reports.Data.Migrations
             modelBuilder.Entity("Reports.Api.Domain.Entities.User", b =>
                 {
                     b.Navigation("Approvals");
+
+                    b.Navigation("ReceivedNotifications");
+
+                    b.Navigation("SentNotifications");
                 });
 
             modelBuilder.Entity("Reports.Domain.Entities.Report", b =>

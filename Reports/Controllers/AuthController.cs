@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Auth.Models;
 using Reports.Api.Auth.Services;
+using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Domain.Constants;
 using Reports.Api.Features.Auth.Commands.RefreshToken;
 using Reports.Api.Features.Auth.Commands.Register;
@@ -9,7 +10,9 @@ using Reports.Api.Features.Common.Models;
 using Reports.Application.Auth.Models;
 using Reports.Features.Admin.Commands.AddUser;
 using Reports.Features.Auth.Commands.UpLoadSignature;
+using Reports.Features.Auth.Queries.GetAllUsers;
 using Reports.Features.Auth.Queries.GetMyProfile;
+using Reports.Features.Auth.Queries.GetUsersStatistics;
 using System.Security.Claims;
 
 namespace Reports.Api.Controllers
@@ -102,7 +105,22 @@ namespace Reports.Api.Controllers
             return Ok(await _mediator.Send(new GetMyProfileQuery()));
         }
 
+        // endpoint return statistics of users
+        [HttpGet("statistics")]
+        [Authorize(Roles = RoleConstants.Admin)]
+        public async Task<IActionResult> GetUsersStatistics()
+        {
+            var result = await _mediator.Send(new GetUsersStatisticsQuery());
+            return Ok(result);
+        }
 
+        // endpoint return all users
+        [HttpPost("all-users")]
+        [Authorize(Roles = RoleConstants.Admin)]
+        public async Task<ActionResult<PagedList<UserDto>>> GetAllUsers([FromBody] GetAllUsersQuery query)
+        {
+            return Ok(await _mediator.Send(query));
+        }
 
 
     }

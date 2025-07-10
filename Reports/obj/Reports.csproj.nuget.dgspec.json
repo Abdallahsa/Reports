@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\Reports.csproj": {}
+    "E:\\Reports\\Reports\\Reports.csproj": {}
   },
   "projects": {
-    "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\Reports.csproj": {
+    "E:\\Reports\\Reports\\Reports.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\Reports.csproj",
+        "projectUniqueName": "E:\\Reports\\Reports\\Reports.csproj",
         "projectName": "Reports",
-        "projectPath": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\Reports.csproj",
-        "packagesPath": "C:\\Users\\Abdallah Saleh\\.nuget\\packages\\",
-        "outputPath": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\obj\\",
+        "projectPath": "E:\\Reports\\Reports\\Reports.csproj",
+        "packagesPath": "C:\\Users\\mas\\.nuget\\packages\\",
+        "outputPath": "E:\\Reports\\Reports\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Abdallah Saleh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -124,7 +134,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -15,6 +15,8 @@ namespace Reports.Api.Data
         public DbSet<ReportApproval> Approval { get; set; }
         public DbSet<ForgotPasswordRequest> ForgotPasswordRequests { get; set; }
         public DbSet<Notification> Notification { get; set; }
+        public DbSet<SystemLog> SystemLog { get; set; }
+
 
 
         public AppDbContext(DbContextOptions options) : base(options)

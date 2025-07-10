@@ -22,6 +22,8 @@ namespace Reports.Features.ForgotPasswordRequests.Queries.GetAllForgotPasswordRe
             var allowedFields = new List<string> { "Id", "Email", "Phone", "CreatedAt", "IsUsed" };
             var allowedSorting = new List<string> { "CreatedAt" };
 
+            request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
+
 
             var queryAll = _context.Set<ForgotPasswordRequest>().AsQueryable();
 

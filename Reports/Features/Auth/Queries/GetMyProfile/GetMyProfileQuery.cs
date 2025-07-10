@@ -29,7 +29,7 @@ namespace Reports.Features.Auth.Queries.GetMyProfile
                     {
                         Id = r.Id,
                         Email = r.Email != null ? r.Email : string.Empty,
-                        EnailConfirmed = r.EmailConfirmed,
+                        IsActive = r.EmailConfirmed,
                         UserName = r.UserName != null ? r.UserName : string.Empty,
                         SignaturePath = r.SignaturePath != null ? storageService.GetFullPath(r.SignaturePath, false) : string.Empty,
                         Geha = r.Geha,

@@ -2,6 +2,7 @@
 using Reports.Api.Data;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
+using Reports.Domain.Entities;
 using Reports.Features.SystemLogs.Models;
 using Reports.Service.LoggingService;
 using TwoHO.Api.Extensions;
@@ -22,7 +23,7 @@ namespace Reports.Features.SystemLogs.Queries.GetAllLog
             try
             {
 
-                var allowedFields = new List<string> { "Id", "Message", "Level", "Exception" };
+                var allowedFields = new List<string> { "Id", "Message", "level", "Exception" };
                 var allowedSorting = new List<string> { "Id", "TimeStamp" };
 
                 request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
@@ -39,20 +40,35 @@ namespace Reports.Features.SystemLogs.Queries.GetAllLog
                 }
 
 
+                // Filter by reportType
+                if (request.Filters != null && request.Filters.TryGetValue("level", out string? level))
+                {
+                    if (Enum.TryParse<LevelLog>(level, true, out var type))
+                    {
+                        queryAll = queryAll.Where(r => r.Level == type.ToString());
+                        request.Filters.Remove("level"); // remove it after use
+                    }
+                    else
+                    {
+                        throw new BadRequestException("Invalid reportType value.");
+                    }
+                }
 
                 var logs = queryAll
-                    .Select(n => new GetAllLogModel
+                    .Select(r => new GetAllLogModel
                     {
-                        Id = n.Id,
-                        Message = n.Message,
-                        Level = n.Level,
-                        TimeStamp = n.TimeStamp,
-                        Exception = n.Exception,
-                        Properties = n.Properties
+                        Id = r.Id,
+                        Message = r.Message,
+                        Level = r.Level,
+                        Exception = r.Exception,
+                        TimeStamp = r.TimeStamp
                     })
                     .ApplyFilters(request.Filters)
-                .ApplySorting(request.SortBy, request.SortDirection)
-                .AsQueryable();
+                    .ApplySorting(request.SortBy, request.SortDirection)
+                    .AsQueryable();
+
+
+
 
                 return await PagedList<GetAllLogModel>.CreateAsync(logs, request.PageNumber, request.PageSize, cancellationToken);
 

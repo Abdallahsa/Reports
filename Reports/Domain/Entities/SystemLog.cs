@@ -11,4 +11,12 @@
         public string Properties { get; set; } = string.Empty;
 
     }
+
+    public enum LevelLog
+    {
+        Information,
+        Warning,
+        Error
+    }
+
 }

@@ -8,6 +8,7 @@ using Reports.Api.Domain.Entities;
 using Reports.Api.Services;
 using Reports.Application.Auth.Models;
 using Reports.Common.Exceptions;
+using Reports.Features.Admin.Models;
 
 namespace Reports.Api.Auth.Services
 {
@@ -20,10 +21,6 @@ namespace Reports.Api.Auth.Services
         ) : IAuthService
     {
 
-        public Task ConfirmByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
 
         private async Task<int> RegisterUserAsync<T>(RegisterModel model, string roleName, Func<T, Task<IdentityResult>> createFunc) where T : User, new()
         {
@@ -66,36 +63,18 @@ namespace Reports.Api.Auth.Services
             return result;
         }
 
-        //public async Task ConfirmByEmail(string email)
-        //{
-        //    var user = await userManager.FindByEmailAsync(email)
-        //        ?? throw new NotFoundException();
+        public async Task ConfirmByEmail(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email)
+                ?? throw new NotFoundException();
 
-        //    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-        //    await userManager.ConfirmEmailAsync(user, token);
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var result = await userManager.ConfirmEmailAsync(user, token);
 
-        //    await ConfirmCustomerAsync(user.Id, currentUserService.UserId);
-        //}
+            if (!result.Succeeded)
+                throw new Exception("Failed to confirm email.");
+        }
 
-        //private async Task ConfirmCustomerAsync(int id, int userId)
-        //{
-        //    var user = await userManager.FindByIdAsync(id.ToString())
-        //                 ?? throw new UnauthorizedAccessException("User not found.");
-
-        //    user.IsConfirmed = true;
-        //    await userManager.UpdateAsync(user);
-
-
-
-        //    // check use don't have any role
-        //    if (await userManager.GetRolesAsync(user) != null)
-        //        return;
-
-        //    // if user is a customer, assign the role
-        //    var addRoleResult = await userManager.AddToRoleAsync(user, RoleConstants.Customer);
-        //    if (!addRoleResult.Succeeded)
-        //        throw new BadRequestException("Failed to add role to user.");
-        //}
 
         public async Task<ICollection<string>> GetRolesAsync(User? user = null)
         {
@@ -207,6 +186,23 @@ namespace Reports.Api.Auth.Services
 
             await context.RefreshTokens.AddAsync(token);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateProfileAsync(UpdateProfileModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.UserId.ToString())
+              ?? throw new NotFoundException(nameof(User), model.UserId);
+
+            user.SignaturePath = model.Signature != null
+                ? await _storageService.SaveFileAsync(model.Signature, false)
+                : user.SignaturePath;
+            user.PasswordHash = model.Password != null
+                ? userManager.PasswordHasher.HashPassword(user, model.Password)
+                : user.PasswordHash;
+
+            userManager.UpdateAsync(user).GetAwaiter().GetResult();
+
+            return user.Id;
         }
     }
 

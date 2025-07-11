@@ -9,6 +9,7 @@ using Reports.Api.Features.Auth.Commands.Register;
 using Reports.Api.Features.Common.Models;
 using Reports.Application.Auth.Models;
 using Reports.Features.Admin.Commands.AddUser;
+using Reports.Features.Admin.Commands.UpdateUser;
 using Reports.Features.Auth.Commands.UpLoadSignature;
 using Reports.Features.Auth.Queries.GetAllUsers;
 using Reports.Features.Auth.Queries.GetMyProfile;
@@ -120,6 +121,15 @@ namespace Reports.Api.Controllers
         public async Task<ActionResult<PagedList<UserDto>>> GetAllUsers([FromBody] GetAllUsersQuery query)
         {
             return Ok(await _mediator.Send(query));
+        }
+
+        // endpoint to update user by id using admin 
+        [HttpPost("update-user")]
+        [Authorize(Roles = RoleConstants.Admin)]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("User updated successfully.");
         }
 
 

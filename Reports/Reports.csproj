@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Admin\Models\" />
     <Folder Include="Features\Admin\Queries\" />
     <Folder Include="Features\SystemLogs\Commands\" />
     <Folder Include="wwwroot\StaticFiles\Docs\" />

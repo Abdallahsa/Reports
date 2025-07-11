@@ -1,7 +1,8 @@
-﻿using Reports.Api.Auth.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Reports.Api.Auth.Models;
 using Reports.Api.Domain.Entities;
 using Reports.Application.Auth.Models;
-using Microsoft.AspNetCore.Identity;
+using Reports.Features.Admin.Models;
 
 namespace Reports.Api.Auth.Services
 {
@@ -10,7 +11,8 @@ namespace Reports.Api.Auth.Services
         Task<int> RegisterAdminAsync(RegisterModel model, int? createdBy);
         Task<int> RegisterCustomerAsync(RegisterModel model, int? createdBy);
 
-
+        // update user profile 
+        Task<int> UpdateProfileAsync(UpdateProfileModel model);
         Task<LoginResponseModel> LoginAsync(LoginModel model);
 
         Task SaveRefreshTokenAsync(User user, string refreshToken);

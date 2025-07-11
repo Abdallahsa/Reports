@@ -15,7 +15,7 @@ namespace Reports.Features.Reportss.Queries.GetAllReport
 {
     public class GetAllReportQuery : GetMyApprovedReportsQuery
     {
-        public bool Archive { get; set; } = true;
+        public bool Archive { get; set; } = false;
 
     }
 
@@ -32,7 +32,7 @@ namespace Reports.Features.Reportss.Queries.GetAllReport
             try
             {
                 var allowedFields = new List<string> { "Id", "reportType", "GehaCode", "ShoabaName", "Description" };
-                var allowedSorting = new List<string> { "Id", "reportType", "CreatedAt" };
+                var allowedSorting = new List<string> { "Id", "CreatedAt" };
 
                 request.ValidateFiltersAndSorting(allowedFields, allowedSorting);
 
@@ -44,14 +44,17 @@ namespace Reports.Features.Reportss.Queries.GetAllReport
                 // Get allowed reports for current user
                 var allowedReports = _userReportService.GetAllowedReportsForCurrentUser();
 
+                //allowedReports.Contains(r.ReportType) &&
+
                 var queryAll = context.Reports
-                    .Where(r => allowedReports.Contains(r.ReportType) && r.IsApprovedByRA == request.Archive);
+                    .Where(r => r.IsApprovedByRA == request.Archive);
 
                 // لو LevelZero → نرجع فقط التقارير من نوعين معينين
                 if (user.Level == Level.LevelZero)
                 {
                     queryAll = queryAll.Where(r => r.ReportType == ReportType.DailyDeputyReport || r.ReportType == ReportType.DailyOperationsReport);
                 }
+
 
                 // Apply search filter if provided
                 if (!string.IsNullOrEmpty(request.Search))

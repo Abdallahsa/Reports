@@ -19,9 +19,18 @@ namespace Reports.Features.SystemLogs.Queries.GetLogsStatistics
         {
             var logsQuery = context.SystemLog.AsQueryable();
 
+            // make filter by date range if provided if have start and end range or start range only or end range only
             if (request.StartRange.HasValue && request.EndRange.HasValue)
             {
                 logsQuery = logsQuery.Where(l => l.TimeStamp >= request.StartRange.Value && l.TimeStamp <= request.EndRange.Value);
+            }
+            else if (request.StartRange.HasValue)
+            {
+                logsQuery = logsQuery.Where(l => l.TimeStamp >= request.StartRange.Value);
+            }
+            else if (request.EndRange.HasValue)
+            {
+                logsQuery = logsQuery.Where(l => l.TimeStamp <= request.EndRange.Value);
             }
 
             var totalErrors = await logsQuery.CountAsync(l => l.Level == "Error", cancellationToken);

@@ -4,8 +4,9 @@ using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
+using Reports.Service.LoggingService;
 using Reports.Service.SaveReport;
-using Serilog;
+
 
 namespace Reports.Features.Reportss.Commands.UnlockReport
 {
@@ -17,7 +18,8 @@ namespace Reports.Features.Reportss.Commands.UnlockReport
     public class UnlockReportCommandHandler(
        AppDbContext _context,
        ITemplateReportService _templateReportService,
-       ICurrentUserService _currentUserService
+       ICurrentUserService _currentUserService,
+       ILoggingService _loggingService
        ) : ICommandHandler<UnlockReportCommand, string>
     {
         public async Task<string> Handle(UnlockReportCommand request, CancellationToken cancellationToken)
@@ -37,13 +39,22 @@ namespace Reports.Features.Reportss.Commands.UnlockReport
                 await _context.SaveChangesAsync(cancellationToken);
 
                 // Log the unlock action
-                Log.Information("Report with ID {ReportId} has been unlocked successfully by {User Id}.", request.ReportId, _currentUserService.UserId);
+                await _loggingService.LogInformation("Report with ID {ReportId} unlocked by user {UserId}", request.ReportId, _currentUserService.UserId);
 
                 return "File unlocked successfully.";
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error unlocking report with ID {ReportId} by {User ID}", request.ReportId, _currentUserService.UserId);
+                // Log the error
+                await _loggingService.LogError(
+                    "Error unlocking report with ID {ReportId}: {Message}",
+                    ex,
+                    request.ReportId,
+                    ex.Message
+                );
+
+
+
                 throw new BadRequestException(ex.Message);
             }
 

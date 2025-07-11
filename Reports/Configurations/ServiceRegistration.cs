@@ -4,6 +4,7 @@ using Reports.Api.Services.CurrentUser;
 using Reports.Api.Services.Notifications;
 using Reports.Service.ApprovalService;
 using Reports.Service.GehaService;
+using Reports.Service.LoggingService;
 using Reports.Service.ReportService;
 using Reports.Service.SaveReport;
 
@@ -25,6 +26,7 @@ namespace Reports.Api.Configurations
             services.AddScoped<IUserGehaService, UserGehaService>();
             services.AddScoped<IReportApprovalService, ReportApprovalService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<ILoggingService, LoggingService>();
 
 
             //services.AddSingleton(services => new MapperConfiguration(cfg =>

@@ -6,7 +6,8 @@ using Reports.Api.Domain.Entities;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.ForgotPasswordRequests.Commands.ChangePassword
 {
@@ -18,6 +19,7 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.ChangePassword
 
     public class ChangePasswordCommandHandler(
         AppDbContext _context,
+        ILoggingService _loggingService,
         UserManager<User> _userManager)
         : ICommandHandler<ChangePasswordCommand, string>
     {
@@ -40,20 +42,26 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.ChangePassword
 
                 if (!result.Succeeded)
                 {
-                    Log.Warning("Failed to reset password for user {UserId}: {Errors}", user.Id, string.Join(",", result.Errors.Select(e => e.Description)));
+                    await _loggingService.LogError(
+                        "Failed to reset password for user {UserId}: {Errors}",
+                        null,
+                        user.Id,
+                        string.Join(",", result.Errors.Select(e => e.Description))
+                    );
                     throw new BadRequestException(result.Errors.First().Description);
                 }
 
                 forgotRequest.IsUsed = true;
                 await _context.SaveChangesAsync(cancellationToken);
 
-                Log.Information("Password changed successfully for user {UserId}", user.Id);
+                await _loggingService.LogInformation("Password changed successfully for user {UserId}", user.Id);
 
                 return "Password changed successfully.";
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error changing password for requestId {RequestId}", request.RequestId);
+                await _loggingService.LogError("Error changing password for request {RequestId}: {Message}", ex, request.RequestId, ex.Message);
+
                 throw new BadRequestException(ex.Message);
             }
         }

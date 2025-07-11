@@ -5,7 +5,8 @@ using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Features.Approval.Models;
 using Reports.Features.Reportss.Model;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
 {
@@ -17,7 +18,8 @@ namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
     // Handler GetReportApprovalHistoryQueryHandler
     public class GetReportApprovalHistoryQueryHandler
         (
-          AppDbContext _context
+          AppDbContext _context,
+         ILoggingService _loggingService
         ) : ICommandHandler<GetReportApprovalHistoryQuery, ReportApprovalHistoryModel>
     {
 
@@ -57,7 +59,8 @@ namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
                     ?? throw new NotFoundException("Report", request.ReportId);
 
                 //log the retrieval of approval history
-                Log.Information("Retrieved approval history for ReportId: {ReportId}", request.ReportId);
+
+                await _loggingService.LogInformation("Retrieved approval history for ReportId: {ReportId}", request.ReportId);
 
                 return approvals;
 
@@ -66,7 +69,9 @@ namespace Reports.Features.Approval.Queries.GetReportApprovalHistory
             catch (Exception ex)
             {
                 // Log the exception (optional)
-                Log.Error(ex, "Error occurred while getting report approval history for ReportId: {ReportId}", request.ReportId);
+
+                await _loggingService.LogError("Error retrieving approval history for ReportId {ReportId}: {Message}", ex, request.ReportId, ex.Message);
+
                 throw new BadRequestException(ex.Message);
             }
 

@@ -4,8 +4,9 @@ using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
+using Reports.Service.LoggingService;
 using Reports.Service.SaveReport;
-using Serilog;
+
 
 namespace Reports.Features.Reportss.Commands.LockReport
 {
@@ -17,7 +18,8 @@ namespace Reports.Features.Reportss.Commands.LockReport
     public class LockReportCommandHandler(
         AppDbContext _context,
         ITemplateReportService _templateReportService,
-        ICurrentUserService _currentUserService
+        ICurrentUserService _currentUserService,
+        ILoggingService _loggingService
         ) : ICommandHandler<LockReportCommand, string>
     {
         public async Task<string> Handle(LockReportCommand request, CancellationToken cancellationToken)
@@ -36,14 +38,16 @@ namespace Reports.Features.Reportss.Commands.LockReport
                 await _context.SaveChangesAsync(cancellationToken);
 
                 // Log the lock action save user id
-                Log.Information("Report {ReportId} locked successfully at {Time} by {user id}", report.Id, DateTime.UtcNow, _currentUserService.UserId);
-
+                await _loggingService.LogInformation("Report with ID {ReportId} locked by user {UserId}", request.ReportId, _currentUserService.UserId);
 
                 return "File locked successfully.";
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error unlocking report with ID {ReportId} by {User ID}", request.ReportId, _currentUserService.UserId);
+                // Log the error
+                await _loggingService.LogError(
+                                       "Error locking report with ID {ReportId}: {Message}", ex, request.ReportId, ex.Message);
+
                 throw new BadRequestException(ex.Message);
             }
         }

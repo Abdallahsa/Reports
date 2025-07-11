@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tRSPb5GwI1LtVzbjYxKrpbhYZSSOg7NTdoSlS0AUNxA=",
+  "Hash": "ojUEiP4EMUANDA2Ly0ybjC5+5okPhm/x+yiQpUDarWM=",
   "Source": "Reports",
   "BasePath": "_content/Reports",
   "Mode": "Default",
@@ -243,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\StaticFiles\\Docs\\2025-07-08-AZ-DailyOperationsReport.docx"
+    },
+    {
+      "Identity": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-11-AZ-DailyDeputyReport.docx",
+      "SourceId": "Reports",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\",
+      "BasePath": "_content/Reports",
+      "RelativePath": "StaticFiles/Docs/2025-07-11-AZ-DailyDeputyReport.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\StaticFiles\\Docs\\2025-07-11-AZ-DailyDeputyReport.docx"
     },
     {
       "Identity": "E:\\Jobs\\projects\\Reports\\Reports\\Reports\\wwwroot\\StaticFiles\\Images\\0b2d238d-9c6c-43a4-a6a5-86fbd9711d9e_Annotation 2025-06-30 093202.png",

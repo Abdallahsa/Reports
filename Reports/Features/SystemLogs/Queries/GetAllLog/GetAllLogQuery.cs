@@ -3,7 +3,7 @@ using Reports.Api.Data;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Features.SystemLogs.Models;
-using Serilog;
+using Reports.Service.LoggingService;
 using TwoHO.Api.Extensions;
 
 namespace Reports.Features.SystemLogs.Queries.GetAllLog
@@ -14,8 +14,8 @@ namespace Reports.Features.SystemLogs.Queries.GetAllLog
     }
 
     // handler of GetAllLogQuery
-    public class GetAllLogQueryHandler(AppDbContext _context)
-         : ICommandHandler<GetAllLogQuery, PagedList<GetAllLogModel>>
+    public class GetAllLogQueryHandler(AppDbContext _context, ILoggingService _loggingService)
+          : ICommandHandler<GetAllLogQuery, PagedList<GetAllLogModel>>
     {
         public async Task<PagedList<GetAllLogModel>> Handle(GetAllLogQuery request, CancellationToken cancellationToken)
         {
@@ -45,7 +45,6 @@ namespace Reports.Features.SystemLogs.Queries.GetAllLog
                     {
                         Id = n.Id,
                         Message = n.Message,
-                        MessageTemplate = n.MessageTemplate,
                         Level = n.Level,
                         TimeStamp = n.TimeStamp,
                         Exception = n.Exception,
@@ -60,8 +59,7 @@ namespace Reports.Features.SystemLogs.Queries.GetAllLog
             }
             catch (Exception ex)
             {
-
-                Log.Error(ex, "An error occurred while handling GetAllLogQuery");
+                await _loggingService.LogError("Error in GetAllLogQuery: {Message}", ex, ex.Message);
                 throw new BadRequestException(ex.Message);
             }
 

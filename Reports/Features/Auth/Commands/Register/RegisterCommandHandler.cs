@@ -5,13 +5,14 @@ using Reports.Api.Auth.Services;
 using Reports.Api.Data;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
-using Serilog;
+using Reports.Service.LoggingService;
 
 namespace Reports.Api.Features.Auth.Commands.Register
 {
     public class RegisterCommandHandler
         (IAuthService authService,
         ICurrentUserService currentUserService,
+        ILoggingService _loggingService,
 
         AppDbContext appDbContext) : ICommandHandler<RegisterCommand>
     {
@@ -40,8 +41,7 @@ namespace Reports.Api.Features.Auth.Commands.Register
                 }, currentUserService.UserId);
 
                 // log
-                Log.Information("User registered successfully with id {UserId} by admin {AdminId}", customerId, currentUserService.UserId);
-
+                await _loggingService.LogInformation("User registered by admin {AdminId} with customer ID {CustomerId}", currentUserService.UserId, customerId);
 
 
 
@@ -51,8 +51,7 @@ namespace Reports.Api.Features.Auth.Commands.Register
             catch (Exception ex)
             {
                 // Rollback the transaction in case of an error
-                Log.Error(ex, "Error occurred while registering user by admin {AdminId}", currentUserService.UserId);
-
+                await _loggingService.LogError("Error registering user: {Message}", ex, ex.Message);
                 await transaction.RollbackAsync(cancellationToken);
                 throw; // Rethrow the exception for further handling
             }

@@ -7,7 +7,8 @@ using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
 using Reports.Features.Reportss.Model;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.Reportss.Queries.GetReportById
 {
@@ -20,7 +21,8 @@ namespace Reports.Features.Reportss.Queries.GetReportById
     public class GetReportByIdQueryHandler
         (
         AppDbContext _context,
-        ICurrentUserService _currentUserService
+        ICurrentUserService _currentUserService,
+        ILoggingService _loggingService
         ) : ICommandHandler<GetReportByIdQuery, GetReportByIdModel>
     {
 
@@ -67,15 +69,14 @@ namespace Reports.Features.Reportss.Queries.GetReportById
 
                 // log
 
-                Log.Information("User {UserId} fetched report {ReportId} successfully", _currentUserService.UserId, request.Id);
-
+                await _loggingService.LogInformation("Fetched report by Id {ReportId} for user {UserId}", request.Id, _currentUserService.UserId);
 
 
                 return report;
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error fetching report by Id {ReportId} for user {UserId}", request.Id, _currentUserService.UserId);
+                await _loggingService.LogError("Error fetching report by ID {ReportId}: {Message}", ex, request.Id, ex.Message);
                 throw new BadRequestException(ex.Message);
             }
 

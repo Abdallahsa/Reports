@@ -341,3 +341,4 @@ E:\Jobs\projects\Reports\Reports\Reports\obj\Debug\net8.0\refint\Reports.dll
 E:\Jobs\projects\Reports\Reports\Reports\obj\Debug\net8.0\Reports.pdb
 E:\Jobs\projects\Reports\Reports\Reports\obj\Debug\net8.0\Reports.genruntimeconfig.cache
 E:\Jobs\projects\Reports\Reports\Reports\obj\Debug\net8.0\ref\Reports.dll
+E:\Jobs\projects\Reports\Reports\Reports\bin\Debug\net8.0\Newtonsoft.Json.dll

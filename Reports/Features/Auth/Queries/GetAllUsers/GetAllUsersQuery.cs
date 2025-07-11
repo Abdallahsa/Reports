@@ -3,7 +3,8 @@ using Reports.Api.Data;
 using Reports.Api.Domain.Entities;
 using Reports.Api.Features.Common.Models;
 using Reports.Common.Abstractions.Mediator;
-using Serilog;
+using Reports.Service.LoggingService;
+
 using TwoHO.Api.Extensions;
 
 namespace Reports.Features.Auth.Queries.GetAllUsers
@@ -15,7 +16,8 @@ namespace Reports.Features.Auth.Queries.GetAllUsers
 
     // Handler of GetAllUsersQuery
     public class GetAllUsersQueryHandler(
-               AppDbContext _context
+               AppDbContext _context,
+               ILoggingService _loggingService
            ) : ICommandHandler<GetAllUsersQuery, PagedList<UserDto>>
     {
         public async Task<PagedList<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
@@ -54,14 +56,15 @@ namespace Reports.Features.Auth.Queries.GetAllUsers
                 var result = await PagedList<UserDto>.CreateAsync(query, request.PageNumber, request.PageSize, cancellationToken);
 
                 // Log the successful retrieval of users
-                Log.Information("Successfully retrieved users. Count: {Count}", result.TotalCount);
+                await _loggingService.LogInformation("Successfully retrieved users. Count: {Count}", result.TotalCount);
 
                 return result;
             }
             catch (Exception ex)
             {
                 // Log the exception or handle it as needed
-                Log.Error(ex, "An error occurred while retrieving users.");
+                await _loggingService.LogError("An error occurred while retrieving users.", ex);
+
                 throw new Exception("An error occurred while retrieving users.", ex);
             }
         }

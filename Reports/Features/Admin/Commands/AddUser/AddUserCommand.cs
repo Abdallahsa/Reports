@@ -6,7 +6,8 @@ using Reports.Api.Data;
 using Reports.Api.Features.Auth.Models;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.Admin.Commands.AddUser
 {
@@ -18,11 +19,13 @@ namespace Reports.Features.Admin.Commands.AddUser
     {
         private readonly IAuthService authService;
         private readonly ICurrentUserService currentUserService;
+        private readonly ILoggingService _loggingService;
 
-        public AddUserCommandHandler(IAuthService authService, ICurrentUserService currentUserService)
+        public AddUserCommandHandler(IAuthService authService, ICurrentUserService currentUserService, ILoggingService loggingService)
         {
             this.authService = authService;
             this.currentUserService = currentUserService;
+            _loggingService = loggingService;
         }
 
         public async Task<int> Handle(AddUserCommand request, CancellationToken cancellationToken)
@@ -42,7 +45,9 @@ namespace Reports.Features.Admin.Commands.AddUser
                 }, currentUserService.UserId);
 
                 // log
-                Log.Information("User registered successfully with id {UserId} by admin {AdminId}", createResult, currentUserService.UserId);
+
+                await _loggingService.LogInformation("User with email {Email} registered successfully by user {UserId} at {Time}",
+                                       request.Email, currentUserService.UserId, DateTime.UtcNow);
 
 
                 return createResult;
@@ -51,7 +56,7 @@ namespace Reports.Features.Admin.Commands.AddUser
 
             catch (Exception ex)
             {
-                Log.Error(ex, "Error while registering user with email {Email}", request.Email);
+                await _loggingService.LogError("Error registering user with email {Email}: {Message}", ex, request.Email, ex.Message);
 
                 throw new Exception($"Failed to register User: {ex.Message}", ex);
 

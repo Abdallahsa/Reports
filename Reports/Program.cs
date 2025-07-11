@@ -2,18 +2,12 @@ using Manzoma.Api.Data.Seeders;
 using Microsoft.OpenApi.Models;
 using Reports.Api.Configurations;
 using Reports.Api.Middleware;
-using Serilog;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog (modern style)
-builder.Host.UseSerilog((context, services, configuration) =>
-{
-    configuration.ReadFrom.Configuration(context.Configuration)
-                 .Enrich.FromLogContext();
-});
+
 
 
 // Add services
@@ -57,8 +51,7 @@ builder.Services.AddSwaggerGen(c =>
 // Register application & infrastructure services
 builder.Services.AddAllExtensions(builder.Configuration);
 
-// say welcome in log 
-Log.Information("Starting Reports API...");
+
 
 var app = builder.Build();
 

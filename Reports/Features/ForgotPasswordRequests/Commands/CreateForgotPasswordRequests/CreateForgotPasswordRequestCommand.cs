@@ -5,7 +5,8 @@ using Reports.Api.Domain.Entities;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordRequests
 {
@@ -18,7 +19,8 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordR
 
 
     public class CreateForgotPasswordRequestCommandHandler(
-        AppDbContext _context
+        AppDbContext _context,
+        ILoggingService _loggingService
         ) : ICommandHandler<CreateForgotPasswordRequestCommand, string>
     {
         public async Task<string> Handle(CreateForgotPasswordRequestCommand request, CancellationToken cancellationToken)
@@ -42,13 +44,16 @@ namespace Reports.Features.ForgotPasswordRequests.Commands.CreateForgotPasswordR
                 await _context.Set<ForgotPasswordRequest>().AddAsync(forgotRequest, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                Log.Information("Forgot password request created for email: {Email} at {Time}", request.Email, DateTime.UtcNow);
+                // Log the creation of the forgot password request
+                await _loggingService.LogInformation("Forgot password request created for email: {Email} at {Time}", request.Email, DateTime.UtcNow);
 
                 return "Forgot password request created successfully.";
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error creating forgot password request for email: {Email}", request.Email);
+
+                await _loggingService.LogError("Error creating forgot password request for email {Email}: {Message}", ex, request.Email, ex.Message);
+
                 throw new BadRequestException(ex.Message);
             }
         }

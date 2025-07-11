@@ -5,14 +5,15 @@ using Reports.Api.Services.Notifications;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
 using Reports.Service.GehaService;
-using Serilog;
+using Reports.Service.LoggingService;
 
 namespace Reports.Service.ApprovalService
 {
     public class ReportApprovalService(
         AppDbContext _context,
         IUserGehaService _userGehaService,
-        INotificationService _notificationService
+        INotificationService _notificationService,
+        ILoggingService _loggingService
     ) : IReportApprovalService
     {
         public async Task ApproveReportAsync(int reportId, int userId)
@@ -89,7 +90,13 @@ namespace Reports.Service.ApprovalService
 
                 // Log the approval action
 
-                Log.Information("Report {ReportId} approved by user {UserId} at level {Level}", reportId, userId, user.Level);
+                await _loggingService.LogInformation("Report {ReportId} approved by user {UserId} at level {Level}",
+                                       new
+                                       {
+                                           ReportId = reportId,
+                                           UserId = userId,
+                                           Level = user.Level
+                                       });
                 _context.Reports.Update(report);
                 await _context.SaveChangesAsync();
 
@@ -97,7 +104,14 @@ namespace Reports.Service.ApprovalService
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error approving report {ReportId} by user {UserId}", reportId, userId);
+
+                await _loggingService.LogError("Error approving report {ReportId} by user {UserId}: {Message}", ex,
+                                                          new
+                                                          {
+                                                              ReportId = reportId,
+                                                              UserId = userId,
+                                                              Message = ex.Message
+                                                          });
                 throw new BadRequestException(ex.Message);
             }
 
@@ -164,11 +178,24 @@ namespace Reports.Service.ApprovalService
                 await _context.SaveChangesAsync();
 
                 // Log the rejection action
-                Log.Information("Report {ReportId} rejected by user {UserId} at level {Level}", reportId, userId, user.Level);
+
+                await _loggingService.LogInformation("Report {ReportId} rejected by user {UserId} at level {Level}",
+                                                          new
+                                                          {
+                                                              ReportId = reportId,
+                                                              UserId = userId,
+                                                              Level = user.Level
+                                                          });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error rejecting report {ReportId} by user {UserId}", reportId, userId);
+                await _loggingService.LogError("Error rejecting report {ReportId} by user {UserId}: {Message}", ex,
+                                                                             new
+                                                                             {
+                                                                                 ReportId = reportId,
+                                                                                 UserId = userId,
+                                                                                 Message = ex.Message
+                                                                             });
                 throw new BadRequestException(ex.Message);
             }
 

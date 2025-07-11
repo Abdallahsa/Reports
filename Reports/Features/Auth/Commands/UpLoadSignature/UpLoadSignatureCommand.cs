@@ -5,7 +5,8 @@ using Reports.Api.Services;
 using Reports.Api.Services.CurrentUser;
 using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
-using Serilog;
+using Reports.Service.LoggingService;
+
 
 namespace Reports.Features.Auth.Commands.UpLoadSignature
 {
@@ -20,7 +21,8 @@ namespace Reports.Features.Auth.Commands.UpLoadSignature
 
     public class UpLoadSignatureCommandHandler(ICurrentUserService currentUserService,
         AppDbContext context,
-        IStorageService storageService
+        IStorageService storageService,
+        ILoggingService _loggingService
         ) : ICommandHandler<UpLoadSignatureCommand>
     {
         public async Task Handle(UpLoadSignatureCommand request, CancellationToken cancellationToken)
@@ -44,13 +46,14 @@ namespace Reports.Features.Auth.Commands.UpLoadSignature
                 // log
 
 
-                Log.Information("Signature uploaded successfully for user {UserId}", currentUserService.UserId);
+
+                await _loggingService.LogInformation("Signature uploaded successfully for user {UserId}", currentUserService.UserId);
 
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                Log.Error(ex, "Error occurred while uploading signature for user {UserId}", currentUserService.UserId);
+                await _loggingService.LogError("Error occurred while uploading signature for user {UserId}: {Message}", ex, currentUserService.UserId, ex.Message);
 
                 throw new BadRequestException(ex.Message);
             }

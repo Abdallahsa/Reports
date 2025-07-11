@@ -8,9 +8,9 @@ using Reports.Common.Abstractions.Mediator;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
 using Reports.Service.GehaService;
+using Reports.Service.LoggingService;
 using Reports.Service.ReportService;
 using Reports.Service.SaveReport;
-using Serilog;
 
 namespace Reports.Features.Reportss.Commands.CreateReport
 {
@@ -24,7 +24,8 @@ namespace Reports.Features.Reportss.Commands.CreateReport
         AppDbContext _context,
         IUserGehaService _userGehaService,
         INotificationService _notificationService,
-        ITemplateReportService _templateReportService
+        ITemplateReportService _templateReportService,
+        ILoggingService _loggingService
     ) : ICommandHandler<CreateReportCommand, string>
     {
         public async Task<string> Handle(CreateReportCommand request, CancellationToken cancellationToken)
@@ -93,16 +94,23 @@ namespace Reports.Features.Reportss.Commands.CreateReport
                 await _context.SaveChangesAsync(cancellationToken);
 
                 // Log the creation of the report
-                Log.Information("Report of type {ReportType} created for user {UserId} with file {FileName}",
-                                                   request.ReportType, _currentUserService.UserId, newFileName);
+                await _loggingService.LogInformation("Report of type {ReportType} created for user {UserId} with file {FileName}",
+                                new
+                                {
+                                    ReportType = request.ReportType,
+                                    UserId = _currentUserService.UserId,
+                                    FileName = newFileName
+                                }
+);
+
 
                 return newFileName;
             }
             catch (Exception ex)
             {
                 // Log the exception (optional)
-                Log.Error(ex, "Error occurred while creating report of type {ReportType} for user {UserId}",
-                                       request.ReportType, _currentUserService.UserId);
+
+                await _loggingService.LogError("Error occurred while creating report", ex, new { ReportType = request.ReportType, UserId = _currentUserService.UserId });
                 throw new BadRequestException(ex.Message);
             }
         }

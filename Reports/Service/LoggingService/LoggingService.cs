@@ -70,11 +70,23 @@ public class LoggingService : ILoggingService
         if (properties == null) return template;
 
         string message = template;
-        foreach (var prop in properties.GetType().GetProperties())
+
+        if (properties is Dictionary<string, object> dict)
         {
-            var value = prop.GetValue(properties)?.ToString() ?? "";
-            message = message.Replace($"{{{prop.Name}}}", value);
+            foreach (var pair in dict)
+            {
+                message = message.Replace($"{{{pair.Key}}}", pair.Value?.ToString() ?? "");
+            }
         }
+        else
+        {
+            foreach (var prop in properties.GetType().GetProperties())
+            {
+                var value = prop.GetValue(properties)?.ToString() ?? "";
+                message = message.Replace($"{{{prop.Name}}}", value);
+            }
+        }
+
         return message;
     }
 

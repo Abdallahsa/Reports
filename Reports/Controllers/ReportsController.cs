@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DocumentFormat.OpenXml.Packaging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reports.Api.Common.Abstractions.Collections;
 using Reports.Api.Controllers;
@@ -11,6 +12,9 @@ using Reports.Features.Reportss.Model;
 using Reports.Features.Reportss.Queries.GetAllReport;
 using Reports.Features.Reportss.Queries.GetAvailableReportTypes;
 using Reports.Features.Reportss.Queries.GetReportById;
+using System.Text.RegularExpressions;
+
+
 
 namespace Reports.Controllers
 {
@@ -91,7 +95,64 @@ namespace Reports.Controllers
 
 
 
+        [HttpGet("placeholders")]
+        public IActionResult GetPlaceholders([FromQuery] string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath) || !System.IO.File.Exists(filePath))
+                return BadRequest("Invalid file path");
+
+            try
+            {
+                var placeholders = new HashSet<string>();
+                var placeholderPattern = new Regex(@"\([^\(\)]+\)"); // Matches (Eshara)
+
+                using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
+                {
+                    var body = wordDoc.MainDocumentPart.Document.Body;
+
+                    // 🟢 1. من النصوص العادية
+                    var texts = body.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>();
+                    foreach (var text in texts)
+                    {
+                        var matches = placeholderPattern.Matches(text.Text);
+                        foreach (Match match in matches)
+                            placeholders.Add(match.Value);
+                    }
+
+                    // 🟢 2. من Alt Text بتاع الصور
+                    var drawings = body.Descendants<DocumentFormat.OpenXml.Wordprocessing.Drawing>();
+                    foreach (var drawing in drawings)
+                    {
+                        var nonVisualProps = drawing.Descendants<DocumentFormat.OpenXml.Drawing.NonVisualDrawingProperties>().FirstOrDefault();
+                        if (nonVisualProps != null)
+                        {
+                            var altText = nonVisualProps.Description ?? nonVisualProps.Title;
+
+                            if (!string.IsNullOrEmpty(altText))
+                            {
+                                var matches = placeholderPattern.Matches(altText);
+                                foreach (Match match in matches)
+                                    placeholders.Add(match.Value);
+                            }
+                        }
+                    }
+                }
+
+                if (!placeholders.Any())
+                    return Ok(new List<string> { "No placeholders found." });
+
+                return Ok(placeholders.ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error reading Word file: {ex.Message}");
+            }
+        }
+
+
 
     }
 
 }
+
+

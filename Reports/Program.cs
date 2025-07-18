@@ -57,6 +57,7 @@ var app = builder.Build();
 
 // Global exception handling middleware (should come first)
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+app.UseStaticFiles();
 
 // Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())

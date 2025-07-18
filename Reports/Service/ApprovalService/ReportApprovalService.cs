@@ -21,9 +21,9 @@ namespace Reports.Service.ApprovalService
             try
             {
                 var report = await _context.Reports
-                .Include(r => r.Approvals)
-                .FirstOrDefaultAsync(r => r.Id == reportId)
-                ?? throw new NotFoundException(nameof(Report), reportId);
+                    .Include(r => r.Approvals)
+                    .FirstOrDefaultAsync(r => r.Id == reportId)
+                    ?? throw new NotFoundException(nameof(Report), reportId);
 
                 var user = await _context.Users.FindAsync(userId)
                     ?? throw new NotFoundException(nameof(User), userId);
@@ -74,7 +74,7 @@ namespace Reports.Service.ApprovalService
                         title, content, participantId, NotificationType.Success, userId);
                 }
 
-                // ✅ Send notification to new level users
+                // Send notification to new level users
                 var newLevelUsers = await _context.Users
                     .Where(u => u.Level == report.CurrentApprovalLevel)
                     .ToListAsync();
@@ -89,48 +89,42 @@ namespace Reports.Service.ApprovalService
                 }
 
                 // Log the approval action
-
                 await _loggingService.LogInformation("Report {ReportId} approved by user {UserId} at level {Level}",
-                                       new
-                                       {
-                                           ReportId = reportId,
-                                           UserId = userId,
-                                           Level = user.Level
-                                       });
+                    new
+                    {
+                        ReportId = reportId,
+                        UserId = userId,
+                        Level = user.Level
+                    });
                 _context.Reports.Update(report);
                 await _context.SaveChangesAsync();
-
-
             }
             catch (Exception ex)
             {
-
                 await _loggingService.LogError("Error approving report {ReportId} by user {UserId}: {Message}", ex,
-                                                          new
-                                                          {
-                                                              ReportId = reportId,
-                                                              UserId = userId,
-                                                              Message = ex.Message
-                                                          });
+                    new
+                    {
+                        ReportId = reportId,
+                        UserId = userId,
+                        Message = ex.Message
+                    });
                 throw new BadRequestException(ex.Message);
             }
-
         }
 
         public async Task RejectReportAsync(int reportId, int userId)
         {
-
             try
             {
                 var report = await _context.Reports
-               .Include(r => r.Approvals)
-               .FirstOrDefaultAsync(r => r.Id == reportId)
-               ?? throw new NotFoundException(nameof(Report), reportId);
+                    .Include(r => r.Approvals)
+                    .FirstOrDefaultAsync(r => r.Id == reportId)
+                    ?? throw new NotFoundException(nameof(Report), reportId);
 
                 var user = await _context.Users.FindAsync(userId)
                     ?? throw new NotFoundException(nameof(User), userId);
 
-                // 👈 Cancel approvals at current level
+                // Cancel approvals at current level
                 var approvalsAtCurrentLevel = report.Approvals
                     .Where(a => a.ApprovalStatus == ApprovalStatus.Approved)
                     .ToList();
@@ -178,27 +172,25 @@ namespace Reports.Service.ApprovalService
                 await _context.SaveChangesAsync();
 
                 // Log the rejection action
-
                 await _loggingService.LogInformation("Report {ReportId} rejected by user {UserId} at level {Level}",
-                                                          new
-                                                          {
-                                                              ReportId = reportId,
-                                                              UserId = userId,
-                                                              Level = user.Level
-                                                          });
+                    new
+                    {
+                        ReportId = reportId,
+                        UserId = userId,
+                        Level = user.Level
+                    });
             }
             catch (Exception ex)
             {
                 await _loggingService.LogError("Error rejecting report {ReportId} by user {UserId}: {Message}", ex,
-                                                                             new
-                                                                             {
-                                                                                 ReportId = reportId,
-                                                                                 UserId = userId,
-                                                                                 Message = ex.Message
-                                                                             });
+                    new
+                    {
+                        ReportId = reportId,
+                        UserId = userId,
+                        Message = ex.Message
+                    });
                 throw new BadRequestException(ex.Message);
             }
-
         }
 
         private Level GetNextLevel(Level current)
@@ -209,9 +201,50 @@ namespace Reports.Service.ApprovalService
                 Level.LevelOne => Level.LevelTwo,
                 Level.LevelTwo => Level.LevelThree,
                 Level.LevelThree => Level.LevelFour,
-                Level.LevelFour => Level.LevelFour, // أعلى مستوى
+                Level.LevelFour => Level.LevelFour, // Highest level
                 _ => current
             };
         }
+
+        ////private void InsertUserSignature(string docxPath, string gehaAltText, string userSignaturePath)
+        //{
+        //    using var wordDoc = WordprocessingDocument.Open(docxPath, true);
+
+        //    var mainPart = wordDoc.MainDocumentPart;
+        //    if (mainPart == null || mainPart.Document?.Body == null)
+        //        throw new InvalidOperationException("Invalid Word document structure.");
+
+        //    // Find drawings with the specified AltText (gehaAltText)
+        //    var drawings = mainPart.Document.Body
+        //        .Descendants<Wp.Drawing>()
+        //        .ToList();
+
+        //    foreach (var drawing in drawings)
+        //    {
+        //        var docPr = drawing.Inline?.DocProperties;
+        //        if (docPr == null || docPr.Description?.Value != gehaAltText)
+        //            continue;
+
+        //        var blip = drawing.Descendants<A.Blip>().FirstOrDefault();
+        //        if (blip?.Embed == null)
+        //            continue;
+
+        //        string oldRelId = blip.Embed.Value;
+        //        var oldImagePart = mainPart.GetPartById(oldRelId);
+        //        mainPart.DeletePart(oldImagePart);
+
+        //        // Add the new signature image
+        //        var newImagePart = mainPart.AddImagePart(ImagePartType.Png);
+        //        using var imageStream = File.OpenRead(userSignaturePath);
+        //        newImagePart.FeedData(imageStream);
+
+        //        // Update the relationship ID in the blip
+        //        blip.Embed.Value = mainPart.GetIdOfPart(newImagePart);
+
+        //        break; // Stop after replacing the first matching image
+        //    }
+
+        //    mainPart.Document.Save();
+        //}
     }
 }

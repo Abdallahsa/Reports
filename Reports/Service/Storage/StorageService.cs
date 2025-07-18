@@ -4,68 +4,74 @@ namespace Reports.Api.Services;
 
 public class StorageService : IStorageService
 {
-    public static string StaticFilesImagesPath => Path.Combine("StaticFiles", "Images");
-    public static string StaticFilesDocsPath => Path.Combine("StaticFiles", "Docs");
-    public StorageService()
+    private readonly string _webRootPath;
+
+    public static string ImagesFolder => Path.Combine("StaticFiles", "Images");
+    public static string DocsFolder => Path.Combine("StaticFiles", "Docs");
+
+    public StorageService(IWebHostEnvironment env)
     {
-        if (!Directory.Exists(StaticFilesImagesPath))
-        {
-            Directory.CreateDirectory(StaticFilesImagesPath);
-            Directory.CreateDirectory(StaticFilesDocsPath);
-        }
+        _webRootPath = env.WebRootPath;
+
+        Directory.CreateDirectory(Path.Combine(_webRootPath, ImagesFolder));
+        Directory.CreateDirectory(Path.Combine(_webRootPath, DocsFolder));
     }
+
     public async Task<string> SaveFileAsync(IFormFile file, bool isUserDocs = false)
     {
-        // Create a unique file name
-        var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+        if (file == null || file.Length == 0)
+            throw new BadRequestException("Invalid file.");
 
-        // get the full path -that will be located on- in the server
+        var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
         var fullPath = GetFullPath(uniqueFileName, isUserDocs);
-        // Save the file
+
         try
         {
-            if (!Directory.Exists(StaticFilesImagesPath))
-                Directory.CreateDirectory(StaticFilesImagesPath);
-
-            if (!Directory.Exists(StaticFilesDocsPath))
-                Directory.CreateDirectory(StaticFilesDocsPath);
-
-            using var stream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            using var stream = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
             await file.CopyToAsync(stream);
         }
         catch (Exception)
         {
             throw new PathNotFoundException(fullPath);
         }
+
         return uniqueFileName;
     }
-    public string GetFullPath(string uniqueName, bool isUserDocs)
+
+    public string GetFullPath(string fileName, bool isUserDocs)
     {
-        // Combine the full path with file name
-        var accessPath = GetHostPath(uniqueName, isUserDocs);
-        var fullPath = Path.Combine(Environment.CurrentDirectory, "wwwroot", accessPath);
-        return fullPath;
+        var relativePath = isUserDocs
+            ? Path.Combine(DocsFolder, fileName)
+            : Path.Combine(ImagesFolder, fileName);
+
+        return Path.Combine(_webRootPath, relativePath);
     }
-    public bool DeleteFile(string uniqueName, bool isUserDocs = false)
+
+    public bool DeleteFile(string fileName, bool isUserDocs = false)
     {
-        var fullPath = GetFullPath(uniqueName, isUserDocs);
+        var fullPath = GetFullPath(fileName, isUserDocs);
+
         try
         {
-            File.Delete(fullPath);
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
         }
         catch
         {
             throw new PathNotFoundException(fullPath);
         }
+
         return true;
     }
 
-    public string GetHostPath(string uniqueName, bool isUserDocs)
+    public string GetHostPath(string fileName, bool isUserDocs)
     {
-        if (isUserDocs)
-            return Path.Combine(StaticFilesDocsPath, uniqueName);
+        var relativePath = isUserDocs
+            ? Path.Combine(DocsFolder, fileName)
+            : Path.Combine(ImagesFolder, fileName);
 
-        return Path.Combine(StaticFilesImagesPath, uniqueName);
-
+        return "/" + relativePath.Replace("\\", "/");
     }
+
+
 }

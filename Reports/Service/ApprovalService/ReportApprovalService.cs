@@ -1,10 +1,11 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+﻿
+using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Office.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using Microsoft.EntityFrameworkCore;
 using Reports.Api.Data;
 using Reports.Api.Domain.Entities;
+using Reports.Api.Services;
 using Reports.Api.Services.Notifications;
 using Reports.Common.Exceptions;
 using Reports.Domain.Entities;
@@ -17,7 +18,8 @@ namespace Reports.Service.ApprovalService
         AppDbContext _context,
         IUserGehaService _userGehaService,
         INotificationService _notificationService,
-        ILoggingService _loggingService
+        ILoggingService _loggingService,
+        IStorageService _storageService
     ) : IReportApprovalService
     {
         public async Task ApproveReportAsync(int reportId, int userId)
@@ -62,22 +64,15 @@ namespace Reports.Service.ApprovalService
                 }
 
                 // ✅ استبدال التوقيع بناءً على AltText
-                var signaturePath = System.IO.Path.Combine("wwwroot", "StaticFiles", "Signatures", $"{userId}.png");
-                if (File.Exists(signaturePath))
-                {
-                    try
-                    {
-                        ReplaceImageByAltText(report.FilePath, user.Geha, signaturePath);
-                    }
-                    catch (Exception e)
-                    {
-                        await _loggingService.LogError("Failed to replace image for report {ReportId}: {Message}", e, new
-                        {
-                            ReportId = report.Id,
-                            Message = e.Message
-                        });
-                    }
-                }
+                //ReplaceImageByAltText(
+                //    _storageService.GetFullPath(report.FilePath, true),
+                //    user.Geha,
+                //    _storageService.GetFullPath(user.SignaturePath, false) // 👈 Fix here
+                //);
+                ReplaceImageByAltText2("E:\\Reports\\Reports\\wwwroot\\StaticFiles\\Docs\\2025-07-20-AZ-DailyOperationsReport.docx",
+                   "E:\\Reports\\Reports\\wwwroot\\StaticFiles\\Images\\5e7d2d20-3921-4423-9400-144e22492b25_Eshara.png",
+                    user.Geha
+                    );
 
                 // 🔔 إشعارات للمشاركين الحاليين
                 var participantUserIds = report.Approvals
@@ -229,7 +224,7 @@ namespace Reports.Service.ApprovalService
             };
         }
 
-        private void ReplaceImageByAltText(string docxPath, string altText, string signaturePath)
+        public static void ReplaceImageByAltText(string docxPath, string altText, string imagePath)
         {
             using var wordDoc = WordprocessingDocument.Open(docxPath, true);
             var mainPart = wordDoc.MainDocumentPart;
@@ -239,11 +234,11 @@ namespace Reports.Service.ApprovalService
             var drawings = mainPart.Document.Body.Descendants<Drawing>().ToList();
             foreach (var drawing in drawings)
             {
-                var docPr = drawing.Descendants<DocProperties>().FirstOrDefault();
-                if (docPr == null || string.IsNullOrWhiteSpace(docPr.Description) || docPr.Description != altText)
+                var docPr = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Wordprocessing.DocProperties>().FirstOrDefault();
+                if (docPr == null || docPr.Description != altText)
                     continue;
 
-                var blip = drawing.Descendants<Blip>().FirstOrDefault();
+                var blip = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Blip>().FirstOrDefault();
                 if (blip?.Embed == null)
                     continue;
 
@@ -252,14 +247,45 @@ namespace Reports.Service.ApprovalService
                     mainPart.DeletePart(oldPart);
 
                 var newImagePart = mainPart.AddImagePart(ImagePartType.Png);
-                using var fs = File.OpenRead(signaturePath);
-                newImagePart.FeedData(fs);
+                using var stream = File.OpenRead(imagePath);
+                newImagePart.FeedData(stream);
 
                 blip.Embed = mainPart.GetIdOfPart(newImagePart);
-                break; // remove this if you want to replace all matching images
+                break; // only replace the first match
             }
 
             mainPart.Document.Save();
+        }
+
+        static void ReplaceImageByAltText2(string docPath, string newImagePath, string targetAltText)
+        {
+            using var wordDoc = WordprocessingDocument.Open(docPath, true);
+            var mainPart = wordDoc.MainDocumentPart;
+
+            var drawings = mainPart.Document.Body.Descendants<Drawing>();
+
+            foreach (var drawing in drawings)
+            {
+                // Get alt text from DocProperties
+                var docProps = drawing.Descendants<DocumentFormat.OpenXml.Drawing.Wordprocessing.DocProperties>().FirstOrDefault();
+                if (docProps == null || docProps.Description?.Value != targetAltText)
+                    continue;
+
+                var blip = drawing.Descendants<Blip>().FirstOrDefault();
+                if (blip?.Embed == null)
+                    continue;
+
+                var imagePartId = blip.Embed.Value;
+                var imagePart = (ImagePart)mainPart.GetPartById(imagePartId);
+
+                using var fs = new FileStream(newImagePath, FileMode.Open, FileAccess.Read);
+                imagePart.FeedData(fs);
+
+                Console.WriteLine($"✅ Image with alt text '{targetAltText}' replaced successfully.");
+                return;
+            }
+
+            Console.WriteLine($"❌ No image found with alt text '{targetAltText}'.");
         }
 
     }

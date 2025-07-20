@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\StaticFiles\Docs\2025-07-18-Eshara-DailyOperationsReport.docx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.19.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -27,7 +31,6 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
-    <PackageReference Include="Xceed.Words.NET" Version="5.0.25228.6154" />
   </ItemGroup>
 
   <ItemGroup>

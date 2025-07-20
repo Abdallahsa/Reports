@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using DocumentFormat.OpenXml.Office.Drawing;
+using DocumentFormat.OpenXml.Packaging;
+using Microsoft.EntityFrameworkCore;
 using Reports.Api.Data;
 using Reports.Api.Domain.Entities;
 using Reports.Api.Services.Notifications;
@@ -28,6 +32,7 @@ namespace Reports.Service.ApprovalService
                 var user = await _context.Users.FindAsync(userId)
                     ?? throw new NotFoundException(nameof(User), userId);
 
+                // تسجيل الموافقة
                 report.Approvals.Add(new ReportApproval
                 {
                     ReportId = report.Id,
@@ -38,9 +43,7 @@ namespace Reports.Service.ApprovalService
                 });
 
                 if (user.Level == Level.LevelFour)
-                {
                     report.IsApprovedByRA = true;
-                }
 
                 var requiredGehas = _userGehaService.GetAllowedGehaByLevel(report.CurrentApprovalLevel)
                     .Select(g => g.ToString())
@@ -55,10 +58,28 @@ namespace Reports.Service.ApprovalService
                 if (requiredGehas.All(required => approvedGehas.Contains(required)))
                 {
                     report.CurrentApprovalLevel = GetNextLevel(report.CurrentApprovalLevel);
-                    report.IsRejected = false; // reset
+                    report.IsRejected = false;
                 }
 
-                // Send notification to all participants
+                // ✅ استبدال التوقيع بناءً على AltText
+                var signaturePath = System.IO.Path.Combine("wwwroot", "StaticFiles", "Signatures", $"{userId}.png");
+                if (File.Exists(signaturePath))
+                {
+                    try
+                    {
+                        ReplaceImageByAltText(report.FilePath, user.Geha, signaturePath);
+                    }
+                    catch (Exception e)
+                    {
+                        await _loggingService.LogError("Failed to replace image for report {ReportId}: {Message}", e, new
+                        {
+                            ReportId = report.Id,
+                            Message = e.Message
+                        });
+                    }
+                }
+
+                // 🔔 إشعارات للمشاركين الحاليين
                 var participantUserIds = report.Approvals
                     .Where(a => a.UserId != userId)
                     .Select(a => a.UserId)
@@ -74,7 +95,7 @@ namespace Reports.Service.ApprovalService
                         title, content, participantId, NotificationType.Success, userId);
                 }
 
-                // Send notification to new level users
+                // 🔔 إشعارات للمستوى الجديد
                 var newLevelUsers = await _context.Users
                     .Where(u => u.Level == report.CurrentApprovalLevel)
                     .ToListAsync();
@@ -88,26 +109,25 @@ namespace Reports.Service.ApprovalService
                         notifyTitle, notifyContent, u.Id, NotificationType.Info, userId);
                 }
 
-                // Log the approval action
-                await _loggingService.LogInformation("Report {ReportId} approved by user {UserId} at level {Level}",
-                    new
-                    {
-                        ReportId = reportId,
-                        UserId = userId,
-                        Level = user.Level
-                    });
+                // 📝 تسجيل العملية
+                await _loggingService.LogInformation("Report {ReportId} approved by user {UserId} at level {Level}", new
+                {
+                    ReportId = reportId,
+                    UserId = userId,
+                    Level = user.Level
+                });
+
                 _context.Reports.Update(report);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                await _loggingService.LogError("Error approving report {ReportId} by user {UserId}: {Message}", ex,
-                    new
-                    {
-                        ReportId = reportId,
-                        UserId = userId,
-                        Message = ex.Message
-                    });
+                await _loggingService.LogError("Error approving report {ReportId} by user {UserId}: {Message}", ex, new
+                {
+                    ReportId = reportId,
+                    UserId = userId,
+                    Message = ex.Message
+                });
                 throw new BadRequestException(ex.Message);
             }
         }
@@ -159,6 +179,9 @@ namespace Reports.Service.ApprovalService
                     .Distinct()
                     .ToList();
 
+
+
+
                 var title = "تنبيه رفض تقرير";
                 var content = $"تم رفض التقرير رقم {report.Id} من المستوى {user.Level} ({user.Geha}).";
 
@@ -206,45 +229,38 @@ namespace Reports.Service.ApprovalService
             };
         }
 
-        ////private void InsertUserSignature(string docxPath, string gehaAltText, string userSignaturePath)
-        //{
-        //    using var wordDoc = WordprocessingDocument.Open(docxPath, true);
+        private void ReplaceImageByAltText(string docxPath, string altText, string signaturePath)
+        {
+            using var wordDoc = WordprocessingDocument.Open(docxPath, true);
+            var mainPart = wordDoc.MainDocumentPart;
+            if (mainPart?.Document?.Body == null)
+                throw new InvalidOperationException("Document structure is invalid.");
 
-        //    var mainPart = wordDoc.MainDocumentPart;
-        //    if (mainPart == null || mainPart.Document?.Body == null)
-        //        throw new InvalidOperationException("Invalid Word document structure.");
+            var drawings = mainPart.Document.Body.Descendants<Drawing>().ToList();
+            foreach (var drawing in drawings)
+            {
+                var docPr = drawing.Descendants<DocProperties>().FirstOrDefault();
+                if (docPr == null || string.IsNullOrWhiteSpace(docPr.Description) || docPr.Description != altText)
+                    continue;
 
-        //    // Find drawings with the specified AltText (gehaAltText)
-        //    var drawings = mainPart.Document.Body
-        //        .Descendants<Wp.Drawing>()
-        //        .ToList();
+                var blip = drawing.Descendants<Blip>().FirstOrDefault();
+                if (blip?.Embed == null)
+                    continue;
 
-        //    foreach (var drawing in drawings)
-        //    {
-        //        var docPr = drawing.Inline?.DocProperties;
-        //        if (docPr == null || docPr.Description?.Value != gehaAltText)
-        //            continue;
+                var oldPart = mainPart.GetPartById(blip.Embed);
+                if (oldPart != null)
+                    mainPart.DeletePart(oldPart);
 
-        //        var blip = drawing.Descendants<A.Blip>().FirstOrDefault();
-        //        if (blip?.Embed == null)
-        //            continue;
+                var newImagePart = mainPart.AddImagePart(ImagePartType.Png);
+                using var fs = File.OpenRead(signaturePath);
+                newImagePart.FeedData(fs);
 
-        //        string oldRelId = blip.Embed.Value;
-        //        var oldImagePart = mainPart.GetPartById(oldRelId);
-        //        mainPart.DeletePart(oldImagePart);
+                blip.Embed = mainPart.GetIdOfPart(newImagePart);
+                break; // remove this if you want to replace all matching images
+            }
 
-        //        // Add the new signature image
-        //        var newImagePart = mainPart.AddImagePart(ImagePartType.Png);
-        //        using var imageStream = File.OpenRead(userSignaturePath);
-        //        newImagePart.FeedData(imageStream);
+            mainPart.Document.Save();
+        }
 
-        //        // Update the relationship ID in the blip
-        //        blip.Embed.Value = mainPart.GetIdOfPart(newImagePart);
-
-        //        break; // Stop after replacing the first matching image
-        //    }
-
-        //    mainPart.Document.Save();
-        //}
     }
 }
